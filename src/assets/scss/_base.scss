@@ -1,0 +1,11 @@
+*, *::after, *::before {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-size: 16px;
+  min-height: 100dvh;
+  display: grid;
+  grid-template-rows: 1fr;
+}
