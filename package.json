@@ -11,7 +11,8 @@
     "type-check": "vue-tsc --build --force",
     "lint": "npm run lint:js && npm run lint:style",
     "lint:js": "eslint . --fix",
-    "lint:style": "stylelint \"**/*.{vue,css,scss}\" --ignore-path .gitignore --max-warnings 0 --fix"
+    "lint:style": "stylelint \"**/*.{vue,css,scss}\" --ignore-path .gitignore --max-warnings 0 --fix",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@vueuse/core": "^11.3.0",
@@ -20,6 +21,8 @@
     "vue-router": "^4.4.5"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.6.0",
+    "@commitlint/config-conventional": "^19.6.0",
     "@stylistic/eslint-plugin": "^2.11.0",
     "@stylistic/eslint-plugin-js": "^2.11.0",
     "@stylistic/eslint-plugin-ts": "^2.11.0",
@@ -31,6 +34,7 @@
     "@vue/tsconfig": "^0.5.1",
     "eslint": "^9.14.0",
     "eslint-plugin-vue": "^9.30.0",
+    "husky": "^9.1.7",
     "npm-run-all2": "^7.0.1",
     "postcss-pxtorem": "^6.1.0",
     "sass": "^1.81.0",
