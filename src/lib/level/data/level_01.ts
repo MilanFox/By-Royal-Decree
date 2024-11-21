@@ -1,6 +1,7 @@
 import { Level } from '../level.class';
 import { Pawn } from '@lib/entities/pawn/pawn.class';
 import type { TileName } from '@lib/terrain';
+import { pawnColors } from '@lib/entities/pawn/pawn.const';
 
 const blueprint: TileName[][] = [
   ['_', '_', '_', '_', '_', '_', '_', '_', '_', '_'],
@@ -17,8 +18,8 @@ const blueprint: TileName[][] = [
 
 const entities = {
   pawns: [
-    new Pawn({ entityOptions: { x: 1, y: 1 }, pawnOptions: { color: '#3e8698' } }),
-    new Pawn({ entityOptions: { x: 2, y: 3 }, pawnOptions: { color: '#b65555', currentAnimation: 2 } }),
+    new Pawn({ entityOptions: { x: 1, y: 1 }, pawnOptions: { color: pawnColors.BLUE } }),
+    new Pawn({ entityOptions: { x: 2, y: 3 }, pawnOptions: { color: pawnColors.RED, currentAnimation: 2 } }),
   ],
 };
 
