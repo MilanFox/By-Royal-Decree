@@ -1,5 +1,5 @@
 <template>
-  <div ref="gameCanvas" class="game-canvas game-canvas--labeled game-canvas--checkered">
+  <div ref="gameCanvas" class="game-canvas">
     <CanvasLayer v-for="id in canvasLayers" :id="id" :key="id"/>
   </div>
 </template>

@@ -8,6 +8,7 @@ export default {
     'selector-max-compound-selectors': 6,
     'selector-pseudo-element-no-unknown': [true, { ignorePseudoElements: ['v-deep'] }],
     'scss/dollar-variable-pattern': null,
+    'scss/dollar-variable-empty-line-before': null,
     'color-no-hex': true,
     'color-named': 'never',
     'selector-class-pattern': [
@@ -16,7 +17,6 @@ export default {
     ],
   },
   overrides: [
-    { files: ['src/assets/base.css'], rules: { 'color-no-hex': null } },
-    { files: ['src/assets/scss/variables.scss'], rules: { 'color-no-hex': null } },
+    { files: ['src/assets/scss/_variables.scss'], rules: { 'color-no-hex': null } },
   ],
 };

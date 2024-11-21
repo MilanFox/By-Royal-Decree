@@ -2,9 +2,10 @@ import { defineStore } from 'pinia';
 import type { Reactive } from 'vue';
 import { computed, reactive, ref } from 'vue';
 
-/* eslint-disable no-unused-vars */
+/* eslint-disable no-unused-vars */ /* (False Positive) */
 export enum CanvasLayerIDs {
   BACKGROUND = 'canvas-background',
+  TERRAIN = 'canvas-terrain',
   GRID = 'canvas-grid',
   ENTITIES = 'canvas-entities',
 }
