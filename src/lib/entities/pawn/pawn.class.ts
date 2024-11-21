@@ -2,6 +2,7 @@ import { Entity } from '../entitiy.class';
 import type { CamInfo } from '@composables/useRenderer';
 import type { PawnConstructorOptions, PawnProperties } from '@lib/entities/pawn/pawn.types';
 import type { Color } from '@lib/types';
+import { pawnColors } from '@lib/entities/pawn/pawn.const';
 
 export class Pawn extends Entity {
   constructor({ entityOptions = {}, pawnOptions = {} }: PawnConstructorOptions) {
@@ -15,7 +16,7 @@ export class Pawn extends Entity {
   }
 
   #pawnProperties: PawnProperties = {
-    color: '#FFFFFF',
+    color: pawnColors.WHITE,
     spriteSheet: { base: new Image(), body: new Image(), shade: new Image() },
     spriteSize: 192,
     spriteFrames: 6,

@@ -2,15 +2,12 @@ import { defineStore } from 'pinia';
 import type { Reactive } from 'vue';
 import { computed, reactive, ref } from 'vue';
 
-/* eslint-disable no-unused-vars */ /* (False Positive) */
 export enum CanvasLayerIDs {
   BACKGROUND = 'canvas-background',
   TERRAIN = 'canvas-terrain',
   GRID = 'canvas-grid',
   ENTITIES = 'canvas-entities',
 }
-
-/* eslint-enable no-unused-vars */
 
 export const useRendererStore = defineStore('renderer', () => {
   const canvasLayers = Object.values(CanvasLayerIDs) as CanvasLayerIDs[];

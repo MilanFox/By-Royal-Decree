@@ -21,7 +21,8 @@ export default [
       'no-loss-of-precision': 'error',
       'no-unreachable-loop': 'error',
       'no-unreachable': 'error',
-      'no-unused-vars': ['error', { 'destructuredArrayIgnorePattern': '^_' }],
+      'no-unused-vars': 'off',
+      '@typescript-eslint/no-unused-vars': ['error', { 'destructuredArrayIgnorePattern': '^_' }],
       'use-isnan': 'error',
       '@typescript-eslint/no-unused-expressions': ['error', { allowShortCircuit: true, allowTernary: true }],
 

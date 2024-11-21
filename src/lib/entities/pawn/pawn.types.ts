@@ -1,8 +1,8 @@
 import type { EntityConstructorOptions } from '@lib/entities/entity.types';
-import type { Color } from '@lib/types';
+import type { pawnColors } from '@lib/entities/pawn/pawn.const';
 
 export interface PawnProperties {
-  color: Color;
+  color: pawnColors;
   spriteSheet: {
     base: HTMLImageElement
     body: HTMLImageElement
