@@ -5,6 +5,7 @@ import { computed, reactive, ref } from 'vue';
 /* eslint-disable no-unused-vars */
 export enum CanvasLayerIDs {
   BACKGROUND = 'canvas-background',
+  GRID = 'canvas-grid',
   ENTITIES = 'canvas-entities',
 }
 
@@ -27,7 +28,7 @@ export const useRendererStore = defineStore('renderer', () => {
 
   const camOffset = reactive({ x: 0, y: 0 });
 
-  const baseTileSize = ref(64);
+  const baseTileSize = ref(48);
   const tileSize = computed(() => baseTileSize.value * zoomLevel.value);
 
   const gameCanvasDimensions = reactive({ width: 0, height: 0 });
