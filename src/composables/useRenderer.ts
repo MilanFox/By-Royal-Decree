@@ -1,19 +1,68 @@
 import { CanvasLayerIDs, useRendererStore } from '@stores/renderer';
+import { levelData } from '@composables/useLevel';
+
+export interface CamInfo {
+  zoomLevel: number;
+  camOffset: { x: number, y: number };
+  tileSize: number;
+}
 
 export default () => {
-  const { getCanvasCtx, gameCanvasDimensions, camOffset } = useRendererStore();
+  const { getCanvasCtx, gameCanvasDimensions } = useRendererStore();
 
   const clearCanvas = (id: CanvasLayerIDs) => {
     getCanvasCtx(id).clearRect(0, 0, gameCanvasDimensions.width, gameCanvasDimensions.height);
   };
 
-  const renderLoop = () => {
-    clearCanvas(CanvasLayerIDs.ENTITIES);
-    const { zoomLevel } = useRendererStore();
+  const drawGrid = ({ camOffset, zoomLevel }: CamInfo) => {
+    clearCanvas(CanvasLayerIDs.GRID);
+    const ctx = getCanvasCtx(CanvasLayerIDs.GRID);
+    const { width, height } = gameCanvasDimensions;
+    const { tileSize } = useRendererStore();
 
-    /* TODO: Temp Sprite */
-    getCanvasCtx(CanvasLayerIDs.ENTITIES)
-      .fillRect((50 + camOffset.x) * zoomLevel, (50 + camOffset.y) * zoomLevel, 25 * zoomLevel, 25 * zoomLevel);
+    ctx.strokeStyle = '#CCCCCC';
+    ctx.setLineDash([5, 5]);
+    ctx.lineWidth = 1;
+
+    const startX = (camOffset.x * zoomLevel) % tileSize;
+    const startY = (camOffset.y * zoomLevel) % tileSize;
+
+    for (let x = startX; x < width; x += tileSize) {
+      ctx.beginPath();
+      ctx.moveTo(x, 0);
+      ctx.lineTo(x, height);
+      ctx.stroke();
+    }
+
+    for (let y = startY; y < height; y += tileSize) {
+      ctx.beginPath();
+      ctx.moveTo(0, y);
+      ctx.lineTo(width, y);
+      ctx.stroke();
+    }
+  };
+
+  let lastEntityPaint = performance.now();
+  const drawEntities = (camInfo: CamInfo) => {
+    clearCanvas(CanvasLayerIDs.ENTITIES);
+    const currentTime = performance.now();
+
+    levelData.entities.pawns
+      .sort((a, b) => b.x - a.x || a.y - b.y)
+      .forEach(pawn => {
+        pawn.update(currentTime - lastEntityPaint);
+        pawn.draw(getCanvasCtx(CanvasLayerIDs.ENTITIES), camInfo);
+      });
+
+    lastEntityPaint = currentTime;
+  };
+
+  const renderLoop = () => {
+    const { camOffset, zoomLevel, tileSize } = useRendererStore();
+    const camInfo: CamInfo = { zoomLevel, camOffset, tileSize };
+
+    drawGrid(camInfo);
+    drawEntities(camInfo);
 
     requestAnimationFrame(renderLoop);
   };
