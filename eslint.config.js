@@ -26,7 +26,6 @@ export default [
       '@typescript-eslint/no-unused-expressions': ['error', { allowShortCircuit: true, allowTernary: true }],
 
       // Suggestions
-      'arrow-body-style': ['warn', 'as-needed'],
       'camelcase': 'error',
       'consistent-return': 'warn',
       'eqeqeq': 'error',
