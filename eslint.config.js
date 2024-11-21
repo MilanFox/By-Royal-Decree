@@ -26,7 +26,7 @@ export default [
       '@typescript-eslint/no-unused-expressions': ['error', { allowShortCircuit: true, allowTernary: true }],
 
       // Suggestions
-      'camelcase': 'error',
+      'camelcase': ['error', { 'allow': ['level_*'] }],
       'consistent-return': 'warn',
       'eqeqeq': 'error',
       'func-style': ['error', 'expression'],

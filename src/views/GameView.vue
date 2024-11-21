@@ -9,7 +9,7 @@
 import GameCanvas from '@/components/molecules/GameCanvas.vue';
 import useLevel from '@composables/useLevel';
 
-useLevel().initializeLevel();
+useLevel().initializeLevel(1);
 </script>
 
 <style lang="scss">

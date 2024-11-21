@@ -43,11 +43,12 @@ export default () => {
   };
 
   let lastEntityPaint = performance.now();
+
   const drawEntities = (camInfo: CamInfo) => {
     clearCanvas(CanvasLayerIDs.ENTITIES);
     const currentTime = performance.now();
 
-    levelData.entities.pawns
+    levelData.currentLevel.entities.pawns
       .sort((a, b) => b.x - a.x || a.y - b.y)
       .forEach(pawn => {
         pawn.update(currentTime - lastEntityPaint);
@@ -57,10 +58,23 @@ export default () => {
     lastEntityPaint = currentTime;
   };
 
+  const drawTerrain = (camInfo: CamInfo) => {
+    clearCanvas(CanvasLayerIDs.TERRAIN);
+    levelData.currentLevel.flatMap.forEach(tile => tile.draw(getCanvasCtx(CanvasLayerIDs.TERRAIN), camInfo));
+  };
+
+  const drawWater = () => {
+    const bg = getCanvasCtx(CanvasLayerIDs.BACKGROUND);
+    bg.fillStyle = '#47aba9';
+    bg.fillRect(0, 0, gameCanvasDimensions.width, gameCanvasDimensions.height);
+  };
+
   const renderLoop = () => {
     const { camOffset, zoomLevel, tileSize } = useRendererStore();
     const camInfo: CamInfo = { zoomLevel, camOffset, tileSize };
 
+    drawWater();
+    drawTerrain(camInfo);
     drawGrid(camInfo);
     drawEntities(camInfo);
 
