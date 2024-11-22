@@ -20,7 +20,7 @@ export default () => {
     const { width, height } = gameCanvasDimensions;
     const { tileSize } = useRendererStore();
 
-    ctx.strokeStyle = '#CCCCCC';
+    ctx.strokeStyle = '#666666';
     ctx.setLineDash([5, 5]);
     ctx.lineWidth = 1;
 

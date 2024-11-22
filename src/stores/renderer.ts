@@ -18,7 +18,7 @@ export const useRendererStore = defineStore('renderer', () => {
   const unregisterLayer = (id: CanvasLayerIDs) => delete canvasCtx[id];
 
   const zoomMax = 2;
-  const zoomMin = 1;
+  const zoomMin = 0.5;
   const zoomStep = 0.25;
   const zoomLevel = ref(1);
   const zoomIn = () => zoomLevel.value = Math.min(zoomMax, zoomLevel.value + zoomStep);

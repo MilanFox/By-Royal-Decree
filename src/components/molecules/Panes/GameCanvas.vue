@@ -1,6 +1,12 @@
 <template>
-  <div ref="gameCanvas" class="game-canvas">
-    <CanvasLayer v-for="id in canvasLayers" :id="id" :key="id"/>
+  <div class="game-canvas">
+    <div class="pane__title">
+      <GamepadIcon title=""/>
+      <h2>Live Preview</h2>
+    </div>
+    <div class="game-canvas__canvas pane__body" ref="gameCanvas">
+      <CanvasLayer v-for="id in canvasLayers" :id="id" :key="id" aria-hidden="true"/>
+    </div>
   </div>
 </template>
 
@@ -10,6 +16,7 @@ import useRenderer from '@composables/useRenderer';
 import { useMouseInElement } from '@vueuse/core';
 import CanvasLayer from '@atoms/CanvasLayer/CanvasLayer.vue';
 import { onBeforeUnmount, onMounted, reactive, ref } from 'vue';
+import GamepadIcon from 'vue-material-design-icons/GamepadVariantOutline.vue';
 
 const { canvasLayers, gameCanvasDimensions, zoomOut, zoomIn, camOffset } = useRendererStore();
 const { renderLoop } = useRenderer();
@@ -96,37 +103,8 @@ onBeforeUnmount(() => {
 
 <style lang="scss">
 .game-canvas {
-  position: relative;
-
-  &--checkered {
-    $checker-color: #EEE; /* stylelint-disable-line color-no-hex */
-    $checker-size: 30px;
-
-    background-image: linear-gradient(45deg, $checker-color 25%, transparent 25%),
-    linear-gradient(-45deg, $checker-color 25%, transparent 25%),
-    linear-gradient(45deg, transparent 75%, $checker-color 75%),
-    linear-gradient(-45deg, transparent 75%, $checker-color 75%);
-    background-position: 0 0,
-    0 calc($checker-size / 2),
-    calc($checker-size / 2) calc(-1 * $checker-size / 2),
-    calc(-1 * $checker-size / 2) 0;
-    background-size: $checker-size $checker-size;
-  }
-
-  &--labeled {
-    border: 3px solid #42b883; /* stylelint-disable-line color-no-hex */
-
-    &::after {
-      content: "GameCanvas.vue";
-      background: #42b883; /* stylelint-disable-line color-no-hex */
-      padding: 5px 10px 5px 15px;
-      border-bottom-left-radius: 20px;
-      color: #FFF; /* stylelint-disable-line color-no-hex */
-      font-family: sans-serif;
-      position: absolute;
-      top: 0;
-      right: 0;
-    }
+  &__canvas {
+    position: relative;
   }
 }
 </style>

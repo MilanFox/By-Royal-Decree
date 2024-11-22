@@ -12,7 +12,7 @@ export default [
     plugins: { '@stylistic': stylistic },
     rules: {
       // Vue & Nuxt
-      'vue/multi-word-component-names': ['error', { 'ignores': ['index', 'default', '[.*]'] }],
+      'vue/multi-word-component-names': 'off',
       'vue/max-attributes-per-line': ['error', { singleline: 5, multiline: 1 }],
       'vue/block-order': ['error', { 'order': ['template', 'script', 'style'] }],
 

@@ -1,18 +1,27 @@
 <template>
   <div class="default-layout">
-    <header/>
+    <Header/>
     <main>
       <RouterView class="default-layout__content"/>
     </main>
-    <footer/>
+    <Footer/>
   </div>
 </template>
+
+<script setup lang="ts">
+import Header from '@molecules/Landmarks/Header.vue';
+import Footer from '@molecules/Landmarks/Footer.vue';
+</script>
 
 <style lang="scss">
 .default-layout {
   height: 100dvh;
+  padding: 0 16px;
+  max-width: 1600px;
+  margin: auto;
   display: flex;
   flex-direction: column;
+  gap: 16px;
 
   &__content {
     height: 100%;
@@ -20,14 +29,6 @@
 
   main {
     flex-grow: 1;
-  }
-
-  header {
-    height: 100px;
-  }
-
-  footer {
-    height: 100px;
   }
 }
 

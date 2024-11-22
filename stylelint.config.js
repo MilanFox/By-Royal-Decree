@@ -17,6 +17,6 @@ export default {
     ],
   },
   overrides: [
-    { files: ['src/assets/scss/_variables.scss'], rules: { 'color-no-hex': null } },
+    { files: ['src/assets/scss/_colors.scss'], rules: { 'color-no-hex': null } },
   ],
 };
