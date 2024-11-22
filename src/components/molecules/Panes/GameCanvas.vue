@@ -16,7 +16,7 @@ import useRenderer from '@composables/useRenderer';
 import { useMouseInElement } from '@vueuse/core';
 import CanvasLayer from '@atoms/CanvasLayer/CanvasLayer.vue';
 import { onBeforeUnmount, onMounted, reactive, ref } from 'vue';
-import GamepadIcon from 'vue-material-design-icons/GamepadVariantOutline.vue';
+import GamepadIcon from 'vue3-material-design-icons-ts/dist/GamepadVariantOutline.vue';
 
 const { canvasLayers, gameCanvasDimensions, zoomOut, zoomIn, camOffset } = useRendererStore();
 const { renderLoop } = useRenderer();

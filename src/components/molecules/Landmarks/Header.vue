@@ -8,7 +8,7 @@
 
 <script setup lang="ts">
 import Avatar from '@atoms/Avatar/Avatar.vue';
-import MenuIcon from 'vue-material-design-icons/Menu.vue';
+import MenuIcon from 'vue3-material-design-icons-ts/dist/Menu.vue';
 </script>
 
 <style lang="scss">
