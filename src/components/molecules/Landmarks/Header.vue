@@ -2,7 +2,7 @@
   <header class="header">
     <Avatar class="header__avatar"/>
     <h1 class="header__headline"><img src="/logo.png" alt="By Royal Decree" class="header__logo"/></h1>
-    <MenuIcon size="40" class="header__menu"/>
+    <MenuIcon :size="40" class="header__menu"/>
   </header>
 </template>
 
