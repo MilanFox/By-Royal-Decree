@@ -1,0 +1,26 @@
+@use "sass:map";
+
+/* Color Definitions */
+
+$colors: (
+  bone-white: #FFFCF2,
+  eerie-black: #252422,
+  olive-black: #403D39,
+  midnight-blue: #114B5F,
+  flame-orange: #EB5E28,
+);
+
+/* Meta Assignment */
+
+$color-text-primary: map.get($colors, bone-white);
+$color-contrast: map.get($colors, bone-white);
+
+/* Color Assignment */
+
+$color-bg: map.get($colors, eerie-black);
+
+$color-avatar-border: $color-contrast;
+
+$color-panes-border: $color-contrast;
+$color-panes-text: $color-text-primary;
+$color-panes-bg: map.get($colors, olive-black);
