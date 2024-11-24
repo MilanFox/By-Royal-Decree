@@ -2,13 +2,15 @@
   <header class="header">
     <Avatar class="header__avatar"/>
     <h1 class="header__headline"><img src="/logo.png" alt="By Royal Decree" class="header__logo"/></h1>
-    <MenuIcon :size="40" class="header__menu"/>
+    <button>
+      <IconMenu class="header__menu" color="#FFFFFF" alt="Menu"/>
+    </button>
   </header>
 </template>
 
 <script setup lang="ts">
 import Avatar from '@atoms/Avatar/Avatar.vue';
-import MenuIcon from 'vue3-material-design-icons-ts/dist/Menu.vue';
+import IconMenu from '@icons/IconMenu.vue';
 </script>
 
 <style lang="scss">
@@ -40,6 +42,7 @@ import MenuIcon from 'vue3-material-design-icons-ts/dist/Menu.vue';
   /* PLACEHOLDER COMPONENT */
   &__menu {
     align-self: center;
+    font-size: 50px;
   }
 }
 </style>

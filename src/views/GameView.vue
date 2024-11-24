@@ -1,13 +1,17 @@
 <template>
   <div class="game-view">
-    <GameCanvas class="game-view__game-canvas pane"/>
-    <IDE class="game-view__ide pane"/>
+    <Pane title="Live Preview">
+      <GameCanvas class="game-view__pane"/>
+    </Pane>
+    <Pane title="Code">
+
+    </Pane>
   </div>
 </template>
 
 <script setup lang="ts">
-import GameCanvas from '@molecules/Panes/GameCanvas.vue';
-import IDE from '@molecules/Panes/IDE.vue';
+import Pane from '@molecules/Pane/Pane.vue';
+import GameCanvas from '@molecules/GameCanvas/GameCanvas.vue';
 import useLevel from '@composables/useLevel';
 
 useLevel().initializeLevel(1);
@@ -31,25 +35,4 @@ useLevel().initializeLevel(1);
   }
 }
 
-.pane {
-  display: flex;
-  flex-direction: column;
-  border: 1px solid $color-panes-border;
-  background: $color-panes-bg;
-  $pane-border: 5px solid $color-panes-bg;
-
-  &__title {
-    user-select: none;
-    padding: 4px 12px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-top: 5px;
-  }
-
-  &__body {
-    flex-grow: 1;
-    margin: 0 5px 5px;
-  }
-}
 </style>

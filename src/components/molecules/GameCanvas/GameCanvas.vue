@@ -1,12 +1,6 @@
 <template>
-  <div class="game-canvas">
-    <div class="pane__title">
-      <GamepadIcon title=""/>
-      <h2>Live Preview</h2>
-    </div>
-    <div class="game-canvas__canvas pane__body" ref="gameCanvas">
-      <CanvasLayer v-for="id in canvasLayers" :id="id" :key="id" aria-hidden="true"/>
-    </div>
+  <div class="game-canvas" ref="gameCanvas">
+    <CanvasLayer v-for="id in canvasLayers" :id="id" :key="id" aria-hidden="true"/>
   </div>
 </template>
 
@@ -16,7 +10,6 @@ import useRenderer from '@composables/useRenderer';
 import { useMouseInElement } from '@vueuse/core';
 import CanvasLayer from '@atoms/CanvasLayer/CanvasLayer.vue';
 import { onBeforeUnmount, onMounted, reactive, ref } from 'vue';
-import GamepadIcon from 'vue3-material-design-icons-ts/dist/GamepadVariantOutline.vue';
 
 const { canvasLayers, gameCanvasDimensions, zoomOut, zoomIn, camOffset } = useRendererStore();
 const { renderLoop } = useRenderer();
@@ -103,8 +96,7 @@ onBeforeUnmount(() => {
 
 <style lang="scss">
 .game-canvas {
-  &__canvas {
-    position: relative;
-  }
+  position: relative;
+  height: 100%;
 }
 </style>

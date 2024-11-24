@@ -9,8 +9,8 @@
 </template>
 
 <script setup lang="ts">
-import Header from '@molecules/Landmarks/Header.vue';
-import Footer from '@molecules/Landmarks/Footer.vue';
+import Header from '@molecules/Header/Header.vue';
+import Footer from '@molecules/Footer/Footer.vue';
 </script>
 
 <style lang="scss">
