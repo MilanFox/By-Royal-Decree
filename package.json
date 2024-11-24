@@ -15,11 +15,11 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@guolao/vue-monaco-editor": "^1.5.4",
     "@vueuse/core": "^11.3.0",
     "pinia": "^2.2.6",
     "vue": "^3.5.12",
-    "vue-router": "^4.4.5",
-    "vue3-material-design-icons-ts": "^5.0.10"
+    "vue-router": "^4.4.5"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.6.0",

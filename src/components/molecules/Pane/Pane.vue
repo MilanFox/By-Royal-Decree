@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import { PaneProps } from '@molecules/Pane/Pane.types.js';
+import type { PaneProps } from '@molecules/Pane/Pane.types.js';
 
 defineProps<PaneProps>();
 </script>

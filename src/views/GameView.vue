@@ -4,7 +4,7 @@
       <GameCanvas class="game-view__pane"/>
     </Pane>
     <Pane title="Code">
-
+      <CodeEditor/>
     </Pane>
   </div>
 </template>
@@ -13,6 +13,7 @@
 import Pane from '@molecules/Pane/Pane.vue';
 import GameCanvas from '@molecules/GameCanvas/GameCanvas.vue';
 import useLevel from '@composables/useLevel';
+import CodeEditor from '@atoms/CodeEditor/CodeEditor.vue';
 
 useLevel().initializeLevel(1);
 </script>

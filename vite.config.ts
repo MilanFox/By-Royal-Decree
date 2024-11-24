@@ -5,7 +5,11 @@ import vueDevTools from 'vite-plugin-vue-devtools';
 import postcssPxToRem from 'postcss-pxtorem';
 
 export default defineConfig({
-  plugins: [vue(), vueDevTools()], resolve: {
+  plugins: [
+    vue(),
+    vueDevTools(),
+  ],
+  resolve: {
     alias: {
       '@assets': fileURLToPath(new URL('./src/assets', import.meta.url)),
       '@icons': fileURLToPath(new URL('./src/components/icons', import.meta.url)),
@@ -20,10 +24,12 @@ export default defineConfig({
       '@stores': fileURLToPath(new URL('./src/stores', import.meta.url)),
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
-  }, css: {
+  },
+  css: {
     preprocessorOptions: {
       scss: { api: 'modern-compiler', additionalData: '@use "@assets/scss/main.scss" as *;' },
-    }, postcss: {
+    },
+    postcss: {
       plugins: [
         postcssPxToRem({
           rootValue: 16,
