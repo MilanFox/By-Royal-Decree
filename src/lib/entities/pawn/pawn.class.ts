@@ -97,4 +97,45 @@ export class Pawn extends Entity {
     canvas.drawImage(baseSprite, ...drawingOptions);
     canvas.drawImage(shadeSprite, ...drawingOptions);
   }
+
+  /* USER API */
+
+  /* eslint-disable no-console */
+  async walk(dir: string) {
+    if (!['up', 'right', 'down', 'left'].includes(dir)) throw new Error('TODO: Err wrong dir');
+    console.log(`Pawn with color ${this.color} walking in direction ${dir}`);
+  }
+
+  async pickUp(amount: number | undefined) {
+    if (amount === undefined) {
+      console.log(`Pawn with color ${this.color} picking up everything.`);
+      return;
+    }
+    if (typeof amount === 'number' && !isNaN(amount)) {
+      console.log(`Pawn with color ${this.color} picking up ${amount} items.`);
+      return;
+    }
+    throw new Error('TODO: Err wrong input');
+  }
+
+  async drop(amount: number | undefined) {
+    if (amount === undefined) {
+      console.log(`Pawn with color ${this.color} dropping everything.`);
+      return;
+    }
+    if (typeof amount === 'number' && !isNaN(amount)) {
+      console.log(`Pawn with color ${this.color} Dropping ${amount} items.`);
+      return;
+    }
+    throw new Error('TODO: Err wrong input');
+  }
+
+  endRoutine() {
+    console.log(`Pawn with color ${this.color} going Home.`);
+  }
+
+  get heldItem() {
+    return `Pawn with color ${this.color} currently holding something, no idea what. Maybe not even.`;
+  }
+  /* eslint-enable no-console */
 }

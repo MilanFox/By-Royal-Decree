@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { IconProps } from '@icons/Icon.types';
+import type { IconProps } from '@icons/Icon.types';
 
 defineProps<IconProps>();
 </script>
