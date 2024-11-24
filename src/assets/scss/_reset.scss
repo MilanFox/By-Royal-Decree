@@ -1,0 +1,21 @@
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 400;
+  font-style: normal;
+  font-size: inherit;
+  margin: 0;
+  overflow-wrap: break-word;
+  text-wrap: balance;
+}
+
+button {
+  appearance: none;
+  border-radius: 0;
+  text-align: inherit;
+  background: none;
+  box-shadow: none;
+  padding: 0;
+  cursor: pointer;
+  border: none;
+  color: inherit;
+  font: inherit;
+}
