@@ -5,7 +5,6 @@
     :options="MONACO_EDITOR_OPTIONS"
     language="javascript"
     :default-value="defaultFunctionContext"
-    @keydown="handleSave"
     @update:value="(value: string) => code = value"
   />
 </template>
@@ -25,13 +24,15 @@ const MONACO_EDITOR_OPTIONS = {
 const code = ref(defaultFunctionContext);
 const logicStore = useLogicStore();
 
-const handleSave = (event: KeyboardEvent) => {
-  if ((event.metaKey || event.ctrlKey) && event.key === 's') {
-    event.preventDefault();
-    logicStore.gameLogic.pawn = eval(code.value);  // eslint-disable-line no-eval
-    useUserLogic().runUserCode();
-  }
+const runUserCode = (event: KeyboardEvent) => {
+  event.preventDefault();
+  logicStore.gameLogic.pawn = eval(code.value);  // eslint-disable-line no-eval
+  useUserLogic().runUserCode();
 };
+
+defineExpose({
+  runUserCode,
+});
 </script>
 
 <style lang="scss">

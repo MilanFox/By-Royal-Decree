@@ -1,4 +1,4 @@
-@use "sass:map";
+@use 'sass:map';
 
 /* Color Definitions */
 
@@ -8,6 +8,9 @@ $colors: (
   olive-black: #403D39,
   midnight-blue: #114B5F,
   flame-orange: #EB5E28,
+  dark-brown: #544644,
+  medium-brown: #766664,
+  light-brown: #9D8776,
 );
 
 /* Meta Assignment */
@@ -21,6 +24,6 @@ $color-bg: map.get($colors, eerie-black);
 
 $color-avatar-border: $color-contrast;
 
-$color-panes-border: $color-contrast;
-$color-panes-text: $color-text-primary;
-$color-panes-bg: map.get($colors, olive-black);
+$color-panes-text: map.get($colors, dark-brown);
+$color-panes-border: map.get($colors, medium-brown);
+$color-panes-shadow: map.get($colors, light-brown);
