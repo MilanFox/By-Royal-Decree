@@ -1,5 +1,6 @@
 import { CanvasLayerIDs, useRendererStore } from '@stores/renderer';
 import { levelData } from '@composables/useLevel';
+import { useUserConfigStore } from '@stores/userConfig';
 
 export interface CamInfo {
   zoomLevel: number;
@@ -8,7 +9,11 @@ export interface CamInfo {
 }
 
 export default () => {
+  const userConfig = useUserConfigStore();
+
   const { getCanvasCtx, gameCanvasDimensions } = useRendererStore();
+
+  let lastPaint = performance.now();
 
   const clearCanvas = (id: CanvasLayerIDs) => {
     getCanvasCtx(id).clearRect(0, 0, gameCanvasDimensions.width, gameCanvasDimensions.height);
@@ -16,6 +21,9 @@ export default () => {
 
   const drawGrid = ({ camOffset, zoomLevel }: CamInfo) => {
     clearCanvas(CanvasLayerIDs.GRID);
+
+    if (!userConfig.shouldRenderGrid) return;
+
     const ctx = getCanvasCtx(CanvasLayerIDs.GRID);
     const { width, height } = gameCanvasDimensions;
     const { tileSize } = useRendererStore();
@@ -42,8 +50,6 @@ export default () => {
     }
   };
 
-  let lastEntityPaint = performance.now();
-
   const drawEntities = (camInfo: CamInfo) => {
     clearCanvas(CanvasLayerIDs.ENTITIES);
     const currentTime = performance.now();
@@ -51,11 +57,11 @@ export default () => {
     levelData.currentLevel.entities.pawns
       .sort((a, b) => b.x - a.x || a.y - b.y)
       .forEach(pawn => {
-        pawn.update(currentTime - lastEntityPaint);
+        if (userConfig.shouldAnimateSprites) pawn.update(currentTime - lastPaint);
         pawn.draw(getCanvasCtx(CanvasLayerIDs.ENTITIES), camInfo);
       });
 
-    lastEntityPaint = currentTime;
+    lastPaint = currentTime;
   };
 
   const drawTerrain = (camInfo: CamInfo) => {
@@ -74,7 +80,7 @@ export default () => {
     clearCanvas(CanvasLayerIDs.WATER_SPRAY);
     const currentTime = performance.now();
     levelData.currentLevel.waterTouchingTiles.forEach(tile => {
-      tile.update(currentTime - lastEntityPaint);
+      if (userConfig.shouldAnimateSprites) tile.update(currentTime - lastPaint);
       tile.drawWaterSpray(ctx, camInfo);
     });
   };
