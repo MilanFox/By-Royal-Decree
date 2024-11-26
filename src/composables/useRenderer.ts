@@ -69,11 +69,22 @@ export default () => {
     bg.fillRect(0, 0, gameCanvasDimensions.width, gameCanvasDimensions.height);
   };
 
+  const drawWaterSpray = (camInfo: CamInfo) => {
+    const ctx = getCanvasCtx(CanvasLayerIDs.WATER_SPRAY);
+    clearCanvas(CanvasLayerIDs.WATER_SPRAY);
+    const currentTime = performance.now();
+    levelData.currentLevel.waterTouchingTiles.forEach(tile => {
+      tile.update(currentTime - lastEntityPaint);
+      tile.drawWaterSpray(ctx, camInfo);
+    });
+  };
+
   const renderLoop = () => {
     const { camOffset, zoomLevel, tileSize } = useRendererStore();
     const camInfo: CamInfo = { zoomLevel, camOffset, tileSize };
 
     drawWater();
+    drawWaterSpray(camInfo);
     drawTerrain(camInfo);
     drawGrid(camInfo);
     drawEntities(camInfo);

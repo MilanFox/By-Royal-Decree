@@ -1,4 +1,4 @@
-import type { LevelConstructorOptions, LevelData, LevelMapBlueprint } from './level.types';
+import type { LevelConstructorOptions, LevelData, SpriteTileLookupOptions } from './level.types';
 import { tileFactory } from '@lib/terrain';
 import { Pawn } from '@lib/entities/pawn/pawn.class';
 
@@ -34,15 +34,11 @@ export class Level {
   get flatMap() { return this.#properties.flatMap; }
   get entities() { return this.#properties.entities; }
   get allEntities() { return Object.values(this.entities).flat() as Pawn[]; }
+  get waterTouchingTiles() { return this.flatMap.filter(tile => this.#isAdjacentToWater(tile)); }
 
   /* --- --- --- --- --- RENDERER API --- --- --- --- --- */
 
-  #calculateSpriteTileIndex({ x, y, tileName, blueprint }: {
-    x: number,
-    y: number,
-    tileName: string,
-    blueprint: LevelMapBlueprint
-  }) {
+  #calculateSpriteTileIndex({ x, y, tileName, blueprint }: SpriteTileLookupOptions) {
     let tilingType = 0;
 
     const neighbors = [
@@ -55,12 +51,23 @@ export class Level {
     for (const { x: nx, y: ny, value } of neighbors) {
       if (blueprint[ny] && blueprint[ny][nx]) {
         const neighborTile = blueprint[ny][nx];
-        if (neighborTile === tileName) {
-          tilingType += value;
-        }
+        if (neighborTile === tileName) tilingType += value;
       }
     }
 
     return tilingType;
+  }
+
+  #isAdjacentToWater({ x, y }: { x: number; y: number }): boolean {
+    const directions = [
+      { dx: 0, dy: -1 }, { dx: 1, dy: 0 }, { dx: 0, dy: 1 }, { dx: -1, dy: 0 },
+      { dx: -1, dy: -1 }, { dx: 1, dy: -1 }, { dx: -1, dy: 1 }, { dx: 1, dy: 1 },
+    ];
+    return directions.some(({ dx, dy }) => {
+      const neighborX = x + dx;
+      const neighborY = y + dy;
+      const isNeighborLand = Boolean(this.#properties.map[neighborY]?.[neighborX]);
+      return (!isNeighborLand);
+    });
   }
 }

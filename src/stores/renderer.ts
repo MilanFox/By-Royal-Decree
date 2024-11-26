@@ -4,6 +4,7 @@ import { computed, reactive, ref } from 'vue';
 
 export enum CanvasLayerIDs {
   BACKGROUND = 'canvas-background',
+  WATER_SPRAY = 'canvas-water-spray',
   TERRAIN = 'canvas-terrain',
   GRID = 'canvas-grid',
   ENTITIES = 'canvas-entities',

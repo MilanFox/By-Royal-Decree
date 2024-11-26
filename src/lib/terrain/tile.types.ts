@@ -5,17 +5,22 @@ type SpriteTilingType = 'single' | '4x4';
 
 export interface TileProperties {
   name: string;
-  isWalkable: boolean;
   spriteSource: string;
   sprite: HTMLImageElement;
   spriteSize: number;
   tiling: SpriteTilingType;
   x: number;
   y: number;
-  isBlocked: boolean;
   floorTile?: Tile;
-  isVoid: boolean;
   spriteTileIndex: number;
+  waterSpray: {
+    sprite: HTMLImageElement,
+    elapsedTime: number,
+    animationSpeed: number,
+    spriteFrames: number,
+    currentFrame: number,
+    spriteSize: number
+  },
 }
 
 export type TileConstructorOptions = PartiallyRequired<TileProperties, 'spriteSource' | 'name'>;

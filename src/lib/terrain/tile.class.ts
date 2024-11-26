@@ -5,66 +5,40 @@ import { spriteTileLookup } from '@lib/terrain/tile.const';
 export class Tile {
   constructor(options: TileConstructorOptions) {
     this.#properties = { ...this.#properties, ...options };
+
     this.#properties.sprite.src = this.#properties.spriteSource;
+    this.#properties.waterSpray.sprite.src = '/sprites/terrain/waterSpray.png';
   }
 
-  #properties: TileProperties = {
+  readonly #properties: TileProperties = {
     name: 'UNDEFINED',
-    isWalkable: false,
     spriteSource: 'UNDEFINED',
     sprite: new Image(),
     tiling: 'single',
     x: 0,
     y: 0,
-    isBlocked: false,
-    isVoid: false,
     spriteSize: 64,
     spriteTileIndex: 0,
+    waterSpray: {
+      sprite: new Image(),
+      elapsedTime: 0,
+      animationSpeed: 10,
+      spriteFrames: 8,
+      currentFrame: 0,
+      spriteSize: 192,
+    },
   };
 
-  get name() {
-    return this.#properties.name;
-  }
+  get name() { return this.#properties.name; }
+  get x() { return this.#properties.x; }
+  get y() { return this.#properties.y; }
+  get sprite() { return this.#properties.sprite; }
+  get tiling() { return this.#properties.tiling; }
+  get spriteSize() { return this.#properties.spriteSize; }
+  get spriteTileIndex() { return this.#properties.spriteTileIndex; }
+  get waterSpray() { return this.#properties.waterSpray;}
 
-  get x() {
-    return this.#properties.x;
-  }
-
-  get y() {
-    return this.#properties.y;
-  }
-
-  get isWalkable() {
-    return this.#properties.isWalkable;
-  }
-
-  get isBlocked() {
-    return this.#properties.isBlocked;
-  }
-
-  get isVoid() {
-    return this.#properties.isVoid;
-  }
-
-  get sprite() {
-    return this.#properties.sprite;
-  }
-
-  get tiling() {
-    return this.#properties.tiling;
-  }
-
-  get spriteSize() {
-    return this.#properties.spriteSize;
-  }
-
-  get spriteTileIndex() {
-    return this.#properties.spriteTileIndex;
-  }
-
-  setSpriteTileIndex(type: number) {
-    this.#properties.spriteTileIndex = type;
-  }
+  setSpriteTileIndex(type: number) { this.#properties.spriteTileIndex = type; }
 
   draw(canvas: CanvasRenderingContext2D, { camOffset, zoomLevel, tileSize }: CamInfo) {
     let sx = 0;
@@ -83,6 +57,31 @@ export class Tile {
     const dy = this.y * tileSize + (camOffset.y * zoomLevel);
     const dWidth = tileSize;
     const dHeight = tileSize;
+
+    canvas.drawImage(sprite, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
+  }
+
+  update(deltaTime: number) {
+    const { waterSpray } = this;
+
+    waterSpray.elapsedTime += deltaTime;
+    if (waterSpray.elapsedTime >= (1000 / waterSpray.animationSpeed)) {
+      waterSpray.currentFrame = (waterSpray.currentFrame + 1) % waterSpray.spriteFrames;
+      waterSpray.elapsedTime = 0;
+    }
+  }
+
+  drawWaterSpray(canvas: CanvasRenderingContext2D, { camOffset, zoomLevel, tileSize }: CamInfo) {
+    const { sprite, currentFrame, spriteSize } = this.waterSpray;
+
+    const sx = currentFrame * spriteSize;
+    const sy = 0;
+    const sWidth = spriteSize;
+    const sHeight = spriteSize;
+    const dx = this.x * tileSize + (camOffset.x * zoomLevel) - tileSize;
+    const dy = this.y * tileSize + (camOffset.y * zoomLevel) - tileSize;
+    const dWidth = tileSize * 3;
+    const dHeight = tileSize * 3;
 
     canvas.drawImage(sprite, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
   }
