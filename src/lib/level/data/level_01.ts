@@ -2,14 +2,14 @@ import { pawnColors } from '@lib/entities/pawn/pawn.const';
 import type { LevelEntityBluePrint, LevelMapBlueprint } from '@lib/level/level.types';
 
 const blueprint: LevelMapBlueprint = [
-  ['grass', 'grass', 'grass', 'grass', 'grass'],
-  ['grass', 'grass', 'grass', 'grass', 'grass'],
-  ['grass', 'grass', '_', 'grass', 'grass'],
-  ['grass', '_', '_', '_', 'grass'],
-  ['grass', 'grass', 'grass', 'grass', 'grass'],
-  ['_', '_', '_', '_', '_', '_', '_', '_', 'sand'],
-  ['_', '_', '_', '_', '_', '_', '_', 'sand', 'sand'],
-  ['_', '_', '_', '_', '_', '_', 'sand', 'sand', 'sand'],
+  ['🟩', '🟩', '🟩', '🟩', '🟩'],
+  ['🟩', '🟩', '🟩', '🟩', '🟩'],
+  ['🟩', '🟩', '🟦', '🟩', '🟩'],
+  ['🟩', '🟦', '🟦', '🟦', '🟩'],
+  ['🟩', '🟩', '🟩', '🟩', '🟩'],
+  ['🟦', '🟦', '🟦', '🟦', '🟦', '🟦', '🟦', '🟦', '🟨'],
+  ['🟦', '🟦', '🟦', '🟦', '🟦', '🟦', '🟦', '🟨', '🟨'],
+  ['🟦', '🟦', '🟦', '🟦', '🟦', '🟦', '🟨', '🟨', '🟨'],
 ];
 
 const entities: LevelEntityBluePrint = {
