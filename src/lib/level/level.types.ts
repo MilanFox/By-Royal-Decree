@@ -26,3 +26,10 @@ export interface LevelConstructorOptions {
   blueprint: LevelMapBlueprint;
   entities: LevelEntityBluePrint;
 }
+
+export interface SpriteTileLookupOptions {
+  x: number,
+  y: number,
+  tileName: string,
+  blueprint: LevelMapBlueprint
+}
