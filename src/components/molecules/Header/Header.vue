@@ -1,48 +1,30 @@
 <template>
   <header class="header">
-    <Avatar class="header__avatar"/>
-    <h1 class="header__headline"><img src="/logo.png" alt="By Royal Decree" class="header__logo"/></h1>
-    <button>
-      <IconMenu class="header__menu" color="#FFFFFF" alt="Menu"/>
-    </button>
+    <a href="/">
+      <h1><img src="/logo.png" alt="By Royal Decree" class="header__logo"/></h1>
+    </a>
+    <Navigation class="header__navigation"/>
   </header>
 </template>
 
 <script setup lang="ts">
-import Avatar from '@atoms/Avatar/Avatar.vue';
-import IconMenu from '@icons/IconMenu.vue';
+import Navigation from '@atoms/Navigation/Navigation.vue';
 </script>
 
 <style lang="scss">
 .header {
-  height: 100px;
+  padding-top: 20px;
+  padding-right: 20px;
   display: flex;
   align-items: end;
   justify-content: space-between;
 
-  &__headline {
-    height: 80%;
-  }
-
   &__logo {
+    height: 80px;
+  }
+
+  &__navigation {
     height: 100%;
-    width: 0;
-
-    @include from-breakpoint(tablet) {
-      width: unset;
-    }
-  }
-
-  /* PLACEHOLDER COMPONENT */
-  &__avatar {
-    height: 80%;
-
-  }
-
-  /* PLACEHOLDER COMPONENT */
-  &__menu {
-    align-self: center;
-    font-size: 50px;
   }
 }
 </style>
