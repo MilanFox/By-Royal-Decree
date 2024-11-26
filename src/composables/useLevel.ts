@@ -12,7 +12,7 @@ export default () => {
   const initializeLevel = async (levelID: number) => {
     const index = levelID - 1;
     if (!levels || !levels[index]) throw new Error(`Level with id "${index}" does not exist.`);
-    levelData.currentLevel = levels[index];
+    levelData.currentLevel = new Level(levels[index]);
   };
 
   return { initializeLevel };

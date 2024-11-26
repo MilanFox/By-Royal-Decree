@@ -1,21 +1,27 @@
-import { Entity } from '../entitiy.class';
 import type { CamInfo } from '@composables/useRenderer';
 import type { PawnConstructorOptions, PawnProperties } from '@lib/entities/pawn/pawn.types';
 import type { Color } from '@lib/types';
-import { pawnColors } from '@lib/entities/pawn/pawn.const';
+import { directions, pawnColors } from '@lib/entities/pawn/pawn.const';
+import { pawnError } from '@lib/entities/pawn/pawn.errors';
+import type { Direction } from '@lib/level/level.types';
+import { Level } from '@lib/level/level.class';
 
-export class Pawn extends Entity {
-  constructor({ entityOptions = {}, pawnOptions = {} }: PawnConstructorOptions) {
-    super(entityOptions);
-    this.#pawnProperties = { ...this.#pawnProperties, ...pawnOptions };
+export class Pawn {
+  constructor(options: PawnConstructorOptions, level: Level) {
+    this.#properties = { ...this.#properties, ...options };
 
-    this.#pawnProperties.spriteSheet.base.src = '/sprites/pawn/base.png';
-    this.#pawnProperties.spriteSheet.body.src = '/sprites/pawn/body.png';
+    this.#properties.spriteSheet.base.src = '/sprites/pawn/base.png';
+    this.#properties.spriteSheet.body.src = '/sprites/pawn/body.png';
+    this.#properties.spriteSheet.shade.src = '/sprites/pawn/shade.png';
     this.#applyColorOverlay(this.color);
-    this.#pawnProperties.spriteSheet.shade.src = '/sprites/pawn/shade.png';
+
+    this.#level = level;
+
+    this.#properties.blockedPosition.x = this.x;
+    this.#properties.blockedPosition.y = this.y;
   }
 
-  #pawnProperties: PawnProperties = {
+  readonly #properties: PawnProperties = {
     color: pawnColors.WHITE,
     spriteSheet: { base: new Image(), body: new Image(), shade: new Image() },
     spriteSize: 192,
@@ -24,39 +30,49 @@ export class Pawn extends Entity {
     elapsedTime: 0,
     animationSpeed: 10,
     currentAnimation: 0,
+    x: 0,
+    y: 0,
+    speed: 2,
+    blockedPosition: { x: 0, y: 0 },
   };
 
-  get color() {
-    return this.#pawnProperties.color;
-  }
+  readonly #level: Level;
 
-  get spriteSize() {
-    return this.#pawnProperties.spriteSize;
-  }
+  /* --- --- --- --- --- PAWN STATE --- --- --- --- --- */
 
-  get currentFrame() {
-    return this.#pawnProperties.currentFrame;
-  }
+  #isBusy = false;
+  #isDrowning = false;
+  #isFinished = false;
+  #isWalkingBackwards = false;
 
-  get animationSpeed() {
-    return this.#pawnProperties.animationSpeed;
-  }
+  /* --- --- --- --- --- PUBLIC GETTERS --- --- --- --- --- */
 
-  get currentAnimation() {
-    return this.#pawnProperties.currentAnimation;
-  }
+  get color() { return this.#properties.color; }
+  get spriteSize() { return this.#properties.spriteSize; }
+  get currentFrame() { return this.#properties.currentFrame; }
+  get animationSpeed() { return this.#properties.animationSpeed; }
+  get currentAnimation() { return this.#properties.currentAnimation; }
+  get x() { return this.#properties.x; }
+  get y() { return this.#properties.y; }
+  get speed() { return this.#properties.speed; }
+  get isBusy() { return this.#isBusy; }
+  get isDrowning() { return this.#isDrowning; }
+  get isFinished() { return this.#isFinished; }
+  get isWalkingBackwards() { return this.#isWalkingBackwards; }
+  get blockedPosition() { return { ...this.#properties.blockedPosition }; }
+
+  /* --- --- --- --- --- RENDERER API --- --- --- --- --- */
 
   update(deltaTime: number) {
-    this.#pawnProperties.elapsedTime += deltaTime;
-
-    if (this.#pawnProperties.elapsedTime >= (1000 / this.animationSpeed)) {
-      this.#pawnProperties.currentFrame = (this.#pawnProperties.currentFrame + 1) % this.#pawnProperties.spriteFrames;
-      this.#pawnProperties.elapsedTime = 0;
+    this.#properties.elapsedTime += deltaTime;
+    if (this.#properties.elapsedTime >= (1000 / this.animationSpeed)) {
+      this.#properties.currentFrame = (this.#properties.currentFrame + 1) % this.#properties.spriteFrames;
+      this.#properties.elapsedTime = 0;
     }
   }
 
   #applyColorOverlay(color: Color) {
-    const img = this.#pawnProperties.spriteSheet.body;
+    const img = this.#properties.spriteSheet.body;
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
@@ -71,24 +87,30 @@ export class Pawn extends Entity {
       const coloredImage = new Image();
       coloredImage.src = canvas.toDataURL();
       coloredImage.onload = () => {
-        this.#pawnProperties.spriteSheet.body = coloredImage;
+        this.#properties.spriteSheet.body = coloredImage;
       };
     };
   }
 
   draw(canvas: CanvasRenderingContext2D, { zoomLevel, camOffset, tileSize }: CamInfo) {
-    const baseSprite = this.#pawnProperties.spriteSheet.base;
-    const bodySprite = this.#pawnProperties.spriteSheet.body;
-    const shadeSprite = this.#pawnProperties.spriteSheet.shade;
+    const baseSprite = this.#properties.spriteSheet.base;
+    const bodySprite = this.#properties.spriteSheet.body;
+    const shadeSprite = this.#properties.spriteSheet.shade;
 
     const sx = this.currentFrame * this.spriteSize;
     const sy = this.currentAnimation * this.spriteSize;
     const sWidth = this.spriteSize;
     const sHeight = this.spriteSize;
-    const dx = this.x * tileSize + (camOffset.x * zoomLevel) - tileSize;
+    let dx = this.x * tileSize + (camOffset.x * zoomLevel) - tileSize;
     const dy = this.y * tileSize + (camOffset.y * zoomLevel) - tileSize;
     const dWidth = tileSize * 3;
     const dHeight = tileSize * 3;
+
+    if (this.isWalkingBackwards) {
+      canvas.save();
+      canvas.scale(-1, 1);
+      dx = -dx - dWidth;
+    }
 
     type DrawingOptions = [number, number, number, number, number, number, number, number];
     const drawingOptions: DrawingOptions = [sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight];
@@ -96,46 +118,62 @@ export class Pawn extends Entity {
     canvas.drawImage(bodySprite, ...drawingOptions);
     canvas.drawImage(baseSprite, ...drawingOptions);
     canvas.drawImage(shadeSprite, ...drawingOptions);
+
+    if (this.isWalkingBackwards) { canvas.restore(); }
   }
 
-  /* USER API */
+  /* --- --- --- --- --- USER API --- --- --- --- --- */
 
-  /* eslint-disable no-console */
-  async walk(dir: string) {
-    if (!['up', 'right', 'down', 'left'].includes(dir)) throw new Error('TODO: Err wrong dir');
-    console.log(`Pawn with color ${this.color} walking in direction ${dir}`);
-  }
+  endRoutine() { this.#isFinished = true; }
 
-  async pickUp(amount: number | undefined) {
-    if (amount === undefined) {
-      console.log(`Pawn with color ${this.color} picking up everything.`);
-      return;
+  async walk(dir: Direction) {
+    if (this.isFinished || this.isDrowning) return;
+    if (!['up', 'right', 'down', 'left'].includes(dir)) throw pawnError.UNKNOWN_DIR(dir);
+    if (this.isBusy) throw pawnError.IS_BUSY();
+
+    this.#isBusy = true;
+    this.#properties.currentAnimation = 1;
+
+    const { x, y } = directions[dir];
+    if (x < 0) this.#isWalkingBackwards = true;
+    if (x > 0) this.#isWalkingBackwards = false;
+
+    const steps = Math.round(100 / this.speed);
+
+    const walkingAnimation = async () => {
+      for (let i = 0; i < steps; i++) {
+        await new Promise(resolve => setTimeout(resolve, 1000 / (this.speed * steps)));
+        this.#properties.x += x / steps;
+        this.#properties.y += y / steps;
+      }
+    };
+
+    while (true) {
+      const retryDelay = 1000 / this.speed;
+      const target = { x: this.x + x, y: this.y + y };
+      const isTargetBlocked = this.#level.allEntities
+        .some(entity => entity.blockedPosition.x === target.x && entity.blockedPosition.y === target.y);
+
+      if (!isTargetBlocked) {
+        this.#properties.blockedPosition = target;
+        await walkingAnimation();
+        break;
+      }
+
+      await new Promise(resolve => setTimeout(resolve, retryDelay));
     }
-    if (typeof amount === 'number' && !isNaN(amount)) {
-      console.log(`Pawn with color ${this.color} picking up ${amount} items.`);
-      return;
-    }
-    throw new Error('TODO: Err wrong input');
-  }
 
-  async drop(amount: number | undefined) {
-    if (amount === undefined) {
-      console.log(`Pawn with color ${this.color} dropping everything.`);
-      return;
-    }
-    if (typeof amount === 'number' && !isNaN(amount)) {
-      console.log(`Pawn with color ${this.color} Dropping ${amount} items.`);
-      return;
-    }
-    throw new Error('TODO: Err wrong input');
-  }
+    /* Flatten out potential floating point errors */
+    this.#properties.x = Math.round(this.x);
+    this.#properties.y = Math.round(this.y);
 
-  endRoutine() {
-    console.log(`Pawn with color ${this.color} going Home.`);
-  }
+    this.#isBusy = false;
+    this.#properties.currentAnimation = 0;
 
-  get heldItem() {
-    return `Pawn with color ${this.color} currently holding something, no idea what. Maybe not even.`;
+    const currentTileIsLand = Boolean(this.#level.map[this.y]?.[this.x]);
+    if (!currentTileIsLand) {
+      this.#isDrowning = true;
+      this.#properties.currentAnimation = 6;
+    }
   }
-  /* eslint-enable no-console */
 }

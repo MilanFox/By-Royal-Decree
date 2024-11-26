@@ -1,9 +1,13 @@
 export const defaultFunctionContext =
-  `async ( pawn ) => {
-    /* DEMO CODE! Not yet doing much except for console logs.
-    Currently gets triggered by "CMD"+"S". Work in Progress. */
-    await pawn.pickUp();
+  `/**
+  Order your pawns to do your bidding - your word is law.
+  */
+  async ( pawn ) => {
+    await pawn.walk('right');
     await pawn.walk('left');
-    await pawn.drop();
+    await pawn.walk('right');
+    await pawn.walk('right');
+    await pawn.walk('down');
     pawn.endRoutine();
+    await pawn.walk('up'); /* Unreachable because routine has ended */
 }`;
