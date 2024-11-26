@@ -1,3 +1,3 @@
 export interface GameControlProps {
-  onPressRun: () => void;
+  onPressRun?: () => void;
 }

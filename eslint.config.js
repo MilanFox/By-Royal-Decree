@@ -48,7 +48,7 @@ export default [
       // Stylistic
       '@stylistic/arrow-spacing': 'error',
       '@stylistic/comma-dangle': ['error', 'only-multiline'],
-      '@stylistic/brace-style': 'error',
+      '@stylistic/brace-style': ['error', '1tbs', { 'allowSingleLine': true }],
       '@stylistic/comma-spacing': ['error', { 'before': false, 'after': true }],
       '@stylistic/computed-property-spacing': ['error', 'never'],
       '@stylistic/curly-newline': ['error', { 'multiline': true, 'minElements': 3, 'consistent': true }],

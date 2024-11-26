@@ -14,6 +14,7 @@ import { defaultFunctionContext } from '@atoms/CodeEditor/CodeEditor.const';
 import { ref } from 'vue';
 import { useLogicStore } from '@stores/logic';
 import useUserLogic from '@composables/useUserLogic';
+import useLevel from '@composables/useLevel';
 
 const MONACO_EDITOR_OPTIONS = {
   automaticLayout: true,
@@ -24,8 +25,8 @@ const MONACO_EDITOR_OPTIONS = {
 const code = ref(defaultFunctionContext);
 const logicStore = useLogicStore();
 
-const runUserCode = (event: KeyboardEvent) => {
-  event.preventDefault();
+const runUserCode = () => {
+  useLevel().initializeLevel(1);
   logicStore.gameLogic.pawn = eval(code.value);  // eslint-disable-line no-eval
   useUserLogic().runUserCode();
 };

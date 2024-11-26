@@ -1,26 +1,22 @@
-import { Level } from '../level.class';
-import { Pawn } from '@lib/entities/pawn/pawn.class';
-import type { TileName } from '@lib/terrain';
 import { pawnColors } from '@lib/entities/pawn/pawn.const';
+import type { LevelEntityBluePrint, LevelMapBlueprint } from '@lib/level/level.types';
 
-const blueprint: TileName[][] = [
-  ['_', '_', '_', '_', '_', '_', '_', '_', '_', '_'],
-  ['_', 'grass', 'grass', 'grass', '_', 'grass', '_', '_', '_', '_'],
-  ['_', 'grass', 'grass', 'grass', '_', 'grass', '_', '_', '_', '_'],
-  ['_', 'grass', 'grass', 'grass', '_', 'grass', '_', '_', '_', '_'],
-  ['_', '_', '_', '_', '_', '_', '_', '_', '_', '_'],
-  ['_', 'grass', 'grass', 'grass', '_', 'grass', '_', '_', '_', '_'],
-  ['_', '_', '_', '_', '_', '_', '_', '_', 'sand', '_'],
-  ['_', '_', '_', '_', '_', '_', '_', 'sand', 'sand', '_'],
-  ['_', '_', '_', '_', '_', '_', 'sand', 'sand', 'sand', '_'],
-  ['_', '_', '_', '_', '_', '_', '_', '_', '_', '_'],
+const blueprint: LevelMapBlueprint = [
+  ['grass', 'grass', 'grass', 'grass', 'grass'],
+  ['grass', 'grass', 'grass', 'grass', 'grass'],
+  ['grass', 'grass', '_', 'grass', 'grass'],
+  ['grass', '_', '_', '_', 'grass'],
+  ['grass', 'grass', 'grass', 'grass', 'grass'],
+  ['_', '_', '_', '_', '_', '_', '_', '_', 'sand'],
+  ['_', '_', '_', '_', '_', '_', '_', 'sand', 'sand'],
+  ['_', '_', '_', '_', '_', '_', 'sand', 'sand', 'sand'],
 ];
 
-const entities = {
+const entities: LevelEntityBluePrint = {
   pawns: [
-    new Pawn({ entityOptions: { x: 1, y: 1 }, pawnOptions: { color: pawnColors.BLUE } }),
-    new Pawn({ entityOptions: { x: 2, y: 3 }, pawnOptions: { color: pawnColors.RED, currentAnimation: 2 } }),
+    { x: 1, y: 1, color: pawnColors.BLUE },
+    { x: 1, y: 2, color: pawnColors.RED },
   ],
 };
 
-export default new Level({ blueprint, entities });
+export default { blueprint, entities };

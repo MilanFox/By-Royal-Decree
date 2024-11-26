@@ -1,18 +1,9 @@
 import type { LevelConstructorOptions, LevelData, LevelMapBlueprint } from './level.types';
 import { tileFactory } from '@lib/terrain';
+import { Pawn } from '@lib/entities/pawn/pawn.class';
 
 export class Level {
-  #properties: LevelData = {
-    map: [[]],
-    flatMap: [],
-    entities: {
-      pawns: [],
-    },
-  };
-
   constructor(options: LevelConstructorOptions) {
-    this.#properties.entities = options.entities;
-
     this.#properties.map = options.blueprint.map((row, y) =>
       row.map((tileName, x) => {
         const tile = tileFactory[tileName](x, y);
@@ -22,20 +13,29 @@ export class Level {
       }),
     );
 
+    this.#properties.entities = {
+      pawns: options.entities.pawns.map(entityData => new Pawn(entityData, this)),
+    };
+
     this.#properties.flatMap = this.#properties.map.flat().filter(tile => tile !== null);
   }
 
-  get map() {
-    return this.#properties.map;
-  }
+  #properties: LevelData = {
+    map: [[]],
+    flatMap: [],
+    entities: {
+      pawns: [],
+    },
+  };
 
-  get flatMap() {
-    return this.#properties.flatMap;
-  }
+  /* --- --- --- --- --- PUBLIC GETTERS --- --- --- --- --- */
 
-  get entities() {
-    return this.#properties.entities;
-  }
+  get map() { return this.#properties.map; }
+  get flatMap() { return this.#properties.flatMap; }
+  get entities() { return this.#properties.entities; }
+  get allEntities() { return Object.values(this.entities).flat() as Pawn[]; }
+
+  /* --- --- --- --- --- RENDERER API --- --- --- --- --- */
 
   #calculateSpriteTileIndex({ x, y, tileName, blueprint }: {
     x: number,
