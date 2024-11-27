@@ -11,7 +11,7 @@
 
 <script setup lang="ts">
 import { SpeedInsights } from '@vercel/speed-insights/vue';
-import Header from '@molecules/Header/Header.vue';
+import Header from '@organisms/Header/Header.vue';
 import Footer from '@molecules/Footer/Footer.vue';
 </script>
 
@@ -24,6 +24,7 @@ import Footer from '@molecules/Footer/Footer.vue';
   display: flex;
   flex-direction: column;
   gap: 16px;
+  position: relative;
 
   &__content {
     height: 100%;
