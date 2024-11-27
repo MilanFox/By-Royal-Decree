@@ -1,13 +1,15 @@
 export const defaultFunctionContext =
-  `/**
-  Order your pawns to do your bidding - your word is law.
-  */
-  async ( pawn ) => {
-    await pawn.walk('right');
-    await pawn.walk('left');
-    await pawn.walk('right');
-    await pawn.walk('right');
-    await pawn.walk('down');
-    pawn.endRoutine();
-    await pawn.walk('up'); /* Unreachable because routine has ended */
-}`;
+  `// Order your pawns to do your bidding - your word is law.
+// currently only "walk()" and "endroutine()" have been implemented
+
+// Example:
+await pawn.walk('right');
+await pawn.walk('left');
+await pawn.walk('right');
+await pawn.walk('right');
+await pawn.walk('down');
+
+pawn.endRoutine();
+
+// Unreachable because routine has ended already:
+await pawn.walk('up');`;
