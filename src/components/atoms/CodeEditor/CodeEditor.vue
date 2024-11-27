@@ -27,7 +27,7 @@ const logicStore = useLogicStore();
 
 const runUserCode = () => {
   useLevel().initializeLevel(1);
-  logicStore.gameLogic.pawn = eval(code.value);  // eslint-disable-line no-eval
+  logicStore.gameLogic.pawn = eval(`async (pawn) => { ${code.value} }`);  // eslint-disable-line no-eval
   useUserLogic().runUserCode();
 };
 
