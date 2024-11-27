@@ -22,6 +22,9 @@ const updateDimensions = () => {
   gameCanvasDimensions.height = gameCanvas.value?.clientHeight ?? 0;
 };
 
+// Fail-safe because some devices don't trigger "resize" on orientation change
+setInterval(updateDimensions, 250);
+
 // Zoom
 
 const handleZoom = (event: WheelEvent) => {

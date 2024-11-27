@@ -17,12 +17,13 @@ defineProps<PaneProps>();
 
 <style lang="scss">
 .pane {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: 60px 1fr;
   border-image: url('/images/panes/background.png') 64 fill / 64px / 0 round;
   font-family: Enchanted, sans-serif;
   color: $color-panes-text;
   font-size: 36px;
+  container-type: inline-size;
 
   &__title {
     user-select: none;
@@ -38,6 +39,8 @@ defineProps<PaneProps>();
     margin: 0 36px 36px;
     border: 2px solid $color-panes-border;
     box-shadow: 0 0 0 3px $color-panes-shadow;
+    height: calc(100% - 60px); // Specific Sizes needed for Monaco to be responsive.
+    width: calc(100cqw - 36px - 36px); // Specific Sizes needed for Monaco to be responsive.
   }
 }
 </style>

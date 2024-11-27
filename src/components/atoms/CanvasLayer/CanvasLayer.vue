@@ -19,6 +19,9 @@ const setSize = () => {
   canvasElement.value.height = gameCanvasDimensions.height;
 };
 
+// Fail-safe because some devices don't trigger "resize" on orientation change
+setInterval(setSize, 250);
+
 onMounted(async () => {
   const context = canvasElement.value?.getContext('2d');
   if (!context) throw canvasLayerError.CTX_NOT_FOUND(props.id);
