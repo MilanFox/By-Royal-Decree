@@ -1,6 +1,6 @@
 {
   "name": "by-royal-decree",
-  "version": "0.0.0",
+  "version": "alpha-0.10.0",
   "private": true,
   "type": "module",
   "scripts": {

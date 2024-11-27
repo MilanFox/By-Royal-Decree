@@ -1,6 +1,6 @@
 <template>
   <header class="header">
-    <a href="/public">
+    <a href="/">
       <h1>
         <picture class="header__logo">
           <source srcset="/logo.png" media="(min-width: 768px)"/>
