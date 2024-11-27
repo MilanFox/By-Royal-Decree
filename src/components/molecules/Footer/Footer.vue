@@ -1,15 +1,13 @@
 <template>
   <footer class="footer">
+    This project is heavily a work in progress — nothing you see here is final or necessarily functional.
   </footer>
 </template>
 
-<script setup lang="ts">
-</script>
 <style lang="scss">
 .footer {
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding-block: 10px;
+  padding: 0 12px 24px;
 }
 </style>
