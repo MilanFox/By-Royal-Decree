@@ -100,3 +100,12 @@ separate files (e.g., `level_01.js`) and follow a simple pattern.
    ```
    http://localhost:5173
    ```
+
+## Credit:
+
+- Sprites / Tileset by Pixel Frog: https://pixelfrog-assets.itch.io/tiny-swords
+- Some Icons by iconfield: https://www.flaticon.com/authors/iconfield/black-hand-drawn?author_id=1502
+- Font / Typeface by Sharkshock: https://www.dafont.com/de/enchanted-land.font
+
+For all of which I am using the non-commercial private licence as this is a learning project with no business
+implications. 
