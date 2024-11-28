@@ -10,6 +10,9 @@ export class Entity {
     Object.entries(options).forEach(([key, val]) => {
       if (key in this) (this as Record<string, unknown>)[`_${key}`] = val;
     });
+
+    this._blockedPosition.x = this.x;
+    this._blockedPosition.y = this.y;
   }
 
   _color: Color | entityColor = entityColor.WHITE;
@@ -19,11 +22,12 @@ export class Entity {
   _elapsedTime = 0;
   _animationSpeed = 10;
   _currentAnimation = 0;
-  _spriteSheet = { base: new Image(), body: new Image(), shade: new Image() };
   _isWalkingBackwards = false;
   _x = 0;
   _y = 0;
   _level: Level;
+  _spriteSheet = { base: new Image(), body: new Image(), shade: new Image(), highlight: new Image() };
+  _blockedPosition = { x: 0, y: 0 };
 
   get color() { return this._color; }
   get spriteSize() { return this._spriteSize; }
@@ -36,6 +40,7 @@ export class Entity {
   get isWalkingBackwards() { return this._isWalkingBackwards; }
   get x() { return this._x; }
   get y() { return this._y; }
+  get blockedPosition() { return { ...this._blockedPosition }; }
 
   updateAnimation = (deltaTime: number) => { updateAnimationHandler(this, deltaTime); };
   colorBody = () => { colorBodyHandler(this); };

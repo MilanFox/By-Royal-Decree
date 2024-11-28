@@ -6,7 +6,7 @@ export enum entityColor {
   ORANGE = '#FF7F11',
   GREEN = '#BEEE62',
   BLACK = '#221E22',
-  YELLOW = '#FFE882',
+  YELLOW = '#b3a645',
 }
 
 export const directions = {

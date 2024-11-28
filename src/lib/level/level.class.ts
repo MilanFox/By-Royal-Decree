@@ -1,6 +1,8 @@
 import type { LevelConstructorOptions, LevelData, SpriteTileLookupOptions } from './level.types';
 import { tileFactory } from '@lib/terrain';
-import { Pawn } from '@lib/entities/pawn/pawn.class';
+import { Pawn } from '@lib/entities/pawn';
+import { Knight } from '@lib/entities/knight';
+import { Entity, MovableEntity } from '@lib/entities/_base';
 
 export class Level {
   constructor(options: LevelConstructorOptions) {
@@ -14,7 +16,8 @@ export class Level {
     );
 
     this.#properties.entities = {
-      pawns: options.entities.pawns.map(entityData => new Pawn(entityData, this)),
+      pawns: options.entities.pawns?.map(entityData => new Pawn(entityData, this)),
+      knights: options.entities.knights?.map(entityData => new Knight(entityData, this)),
     };
 
     this.#properties.flatMap = this.#properties.map.flat().filter(tile => tile !== null);
@@ -33,7 +36,7 @@ export class Level {
   get map() { return this.#properties.map; }
   get flatMap() { return this.#properties.flatMap; }
   get entities() { return this.#properties.entities; }
-  get allEntities() { return Object.values(this.entities).flat() as Pawn[]; }
+  get allEntities() { return Object.values(this.entities).flat() as Entity[]; }
   get waterTouchingTiles() { return this.flatMap.filter(tile => this.#isAdjacentToWater(tile)); }
 
   /* --- --- --- --- --- RENDERER API --- --- --- --- --- */

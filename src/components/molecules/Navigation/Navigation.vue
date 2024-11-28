@@ -2,7 +2,7 @@
   <nav class="navigation">
     <IconButton
       icon="menu"
-      alt="Toggle Menu"
+      text="Toggle Menu"
       @click="toggleMobileNavigation"
       class="navigation__menu-button"
       :aria-expanded="shouldShowMobileNavigation"

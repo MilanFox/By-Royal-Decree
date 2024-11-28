@@ -1,7 +1,8 @@
 import type { Tile } from '@lib/terrain/tile.class';
 import type { Pawn } from '@lib/entities/pawn/pawn.class';
 import type { TileName } from '@lib/terrain';
-import type { PawnConstructorOptions } from '@lib/entities/pawn/pawn.types';
+import type { PawnProps } from '@lib/entities/pawn';
+import { Knight, type KnightProps } from '@lib/entities/knight';
 
 export type Direction = 'up' | 'right' | 'down' | 'left';
 
@@ -9,11 +10,13 @@ export type LevelMap = Array<Array<Tile | null>>;
 export type LevelMapBlueprint = Array<Array<TileName>>;
 
 export interface LevelEntityBluePrint {
-  pawns: Array<PawnConstructorOptions>;
+  pawns?: Array<PawnProps>;
+  knights?: Array<KnightProps>;
 }
 
 export interface EntityData {
-  pawns: Pawn[];
+  pawns?: Pawn[];
+  knights?: Knight[];
 }
 
 export interface LevelData {

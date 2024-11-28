@@ -38,6 +38,7 @@ export const drawHandler = (entity: Entity, canvas: CanvasRenderingContext2D, {
   const baseSprite = entity.spriteSheet.base;
   const bodySprite = entity.spriteSheet.body;
   const shadeSprite = entity.spriteSheet.shade;
+  const highlightSprite = entity.spriteSheet.highlight;
 
   const sx = entity.currentFrame * entity.spriteSize;
   const sy = entity.currentAnimation * entity.spriteSize;
@@ -60,6 +61,7 @@ export const drawHandler = (entity: Entity, canvas: CanvasRenderingContext2D, {
   canvas.drawImage(bodySprite, ...drawingOptions);
   canvas.drawImage(baseSprite, ...drawingOptions);
   canvas.drawImage(shadeSprite, ...drawingOptions);
+  canvas.drawImage(highlightSprite, ...drawingOptions);
 
   if (entity.isWalkingBackwards) { canvas.restore(); }
 };

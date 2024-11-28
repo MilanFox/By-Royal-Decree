@@ -13,5 +13,10 @@ export interface EntityProps {
   elapsedTime: number;
   animationSpeed: number;
   currentAnimation: number;
-  spriteSheet: { base: HTMLImageElement, body?: HTMLImageElement, shade?: HTMLImageElement };
+  spriteSheet: {
+    base: HTMLImageElement,
+    body?: HTMLImageElement,
+    shade?: HTMLImageElement
+    highlight?: HTMLImageElement,
+  };
 }
