@@ -54,10 +54,10 @@ export default () => {
     clearCanvas(CanvasLayerIDs.ENTITIES);
     const currentTime = performance.now();
 
-    levelData.currentLevel.entities.pawns
+    levelData.currentLevel.allEntities
       .sort((a, b) => b.x - a.x || a.y - b.y)
       .forEach(pawn => {
-        if (userConfig.shouldAnimateSprites) pawn.update(currentTime - lastPaint);
+        if (userConfig.shouldAnimateSprites) pawn.updateAnimation(currentTime - lastPaint);
         pawn.draw(getCanvasCtx(CanvasLayerIDs.ENTITIES), camInfo);
       });
 

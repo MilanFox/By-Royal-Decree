@@ -1,6 +1,6 @@
 export const defaultFunctionContext =
   `// Order your pawns to do your bidding - your word is law.
-// currently only "walk()" and "endroutine()" have been implemented
+// currently only "walk()" and "endRoutine()" have been implemented
 
 // Example:
 await pawn.walk('right');

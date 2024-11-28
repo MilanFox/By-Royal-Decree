@@ -1,10 +1,10 @@
 <template>
   <nav class="navigation">
     <button class="navigation__menu-button" @click="toggleMobileNavigation">
-      <img src="/icons/menu.png" alt="Show Menu" aria-haspopup="menu">
+      <img src="/icons/menu.png" alt="Show Menu" :aria-expanded="shouldShowMobileNavigation" aria-controls="mobile-nav">
     </button>
 
-    <ul class="navigation__list" :class="{'navigation__list--visible': shouldShowMobileNavigation}">
+    <ul class="navigation__list" :class="{'navigation__list--visible': shouldShowMobileNavigation}" id="mobile-nav">
       <li v-for="navItem in navItems" :key="navItem.text">
         <NavigationItem v-bind="navItem"/>
       </li>
