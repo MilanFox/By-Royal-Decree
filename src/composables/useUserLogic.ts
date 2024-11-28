@@ -7,7 +7,7 @@ export default () => {
   const { pawn: applyPawnLogic } = logicStore.gameLogic;
 
   const runUserCode = () => {
-    pawns.forEach(pawn => applyPawnLogic(pawn));
+    pawns?.forEach(pawn => applyPawnLogic(pawn));
   };
 
   return { runUserCode };

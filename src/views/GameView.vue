@@ -3,7 +3,7 @@
     <Pane title="Live Preview">
       <GameCanvas class="game-view__pane"/>
     </Pane>
-    <GameControls :onPressRun="codeEditor?.runUserCode"/>
+    <GameControls :buttons="controls"/>
     <Pane title="Code">
       <CodeEditor ref="codeEditor"/>
     </Pane>
@@ -17,17 +17,25 @@ import useLevel from '@composables/useLevel';
 import CodeEditor from '@atoms/CodeEditor/CodeEditor.vue';
 import GameControls from '@molecules/GameControls/GameControls.vue';
 import { ref } from 'vue';
+import type { IconButtonProps } from '@atoms/IconButton/IconButton.types';
+import { useRendererStore } from '@stores/renderer';
 
 useLevel().initializeLevel(1);
 
+const renderStore = useRendererStore();
 const codeEditor = ref();
+
+const controls: IconButtonProps[] = [
+  { text: 'Run Code', icon: 'play', onClick: () => codeEditor?.value.runUserCode() },
+  { text: 'Recenter View', icon: 'vision', onClick: () => renderStore.recenterView() },
+];
 </script>
 
 <style lang="scss">
 .game-view {
   display: grid;
   gap: 16px;
-  grid-template-rows: 1fr min-content 1fr;
+  grid-template-rows:  1fr min-content 1fr;
   grid-template-columns: 1fr;
 
   @include from-breakpoint(tablet) {

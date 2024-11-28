@@ -6,5 +6,4 @@ export const useUserConfigStore = defineStore('userConfig', () => {
   const shouldAnimateSprites = ref(true);
 
   return { shouldRenderGrid, shouldAnimateSprites };
-},
-);
+});

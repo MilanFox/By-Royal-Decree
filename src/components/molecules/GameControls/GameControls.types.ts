@@ -1,3 +1,5 @@
+import type { IconButtonProps } from '@atoms/IconButton/IconButton.types';
+
 export interface GameControlProps {
-  onPressRun?: () => void;
+  buttons: IconButtonProps[];
 }

@@ -1,6 +1,6 @@
 <template>
   <div class="game-controls">
-    <IconButton icon="backward" alt="Run Program" @click="onPressRun" class="game-controls__button-play"/>
+    <IconButton v-for="button in buttons" :key="button.text" v-bind="button"/>
   </div>
 </template>
 
@@ -13,27 +13,12 @@ defineProps<GameControlProps>();
 
 <style lang="scss">
 .game-controls {
-  display: grid;
-  place-items: center;
+  display: flex;
+  gap: 16px;
 
-  &__button-play {
-    img {
-      transform: translateY(-1px) rotateZ(90deg);
-
-      @include from-breakpoint(tablet) {
-        transform: translateY(-1px) rotateZ(0);
-      }
-    }
-
-    &:active {
-      img {
-        transform: translateY(3px) rotateZ(90deg);
-
-        @include from-breakpoint(tablet) {
-          transform: translateY(3px) rotateZ(0);
-        }
-      }
-    }
+  @include from-breakpoint(tablet) {
+    flex-direction: column;
+    padding-top: 12px;
   }
 }
 </style>
