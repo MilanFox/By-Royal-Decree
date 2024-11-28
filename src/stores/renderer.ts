@@ -25,17 +25,15 @@ export const useRendererStore = defineStore('renderer', () => {
   const zoomIn = () => zoomLevel.value = Math.min(zoomMax, zoomLevel.value + zoomStep);
   const zoomOut = () => zoomLevel.value = Math.max(zoomMin, zoomLevel.value - zoomStep);
 
-  const camOffset = reactive({ x: 0, y: 0 });
-
   const baseTileSize = ref(48);
   const tileSize = computed(() => baseTileSize.value * zoomLevel.value);
-
+  const camOffset = reactive({ x: baseTileSize.value / 2, y: baseTileSize.value / 2 });
   const gameCanvasDimensions = reactive({ width: 0, height: 0 });
 
   const recenterView = () => {
     zoomLevel.value = 1;
-    camOffset.x = 0;
-    camOffset.y = 0;
+    camOffset.x = baseTileSize.value / 2;
+    camOffset.y = baseTileSize.value / 2;
   };
 
   return {
