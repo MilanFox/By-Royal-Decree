@@ -2,7 +2,7 @@ import type { LevelConstructorOptions, LevelData, SpriteTileLookupOptions } from
 import { tileFactory } from '@lib/terrain';
 import { Pawn } from '@lib/entities/pawn';
 import { Knight } from '@lib/entities/knight';
-import { Entity, MovableEntity } from '@lib/entities/_base';
+import { Entity } from '@lib/entities/_base';
 
 export class Level {
   constructor(options: LevelConstructorOptions) {
