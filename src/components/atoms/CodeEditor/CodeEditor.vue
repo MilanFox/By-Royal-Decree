@@ -4,35 +4,34 @@
     theme="vs-dark"
     :options="MONACO_EDITOR_OPTIONS"
     language="javascript"
-    :default-value="defaultFunctionContext"
+    :default-value="defaultCode"
     @update:value="(value: string) => code = value"
   />
 </template>
 
 <script setup lang="ts">
-import { defaultFunctionContext } from '@atoms/CodeEditor/CodeEditor.const';
 import { ref } from 'vue';
 import { useLogicStore } from '@stores/logic';
-import useUserLogic from '@composables/useUserLogic';
-import useLevel from '@composables/useLevel';
+import type { CodeEditorProps } from '@atoms/CodeEditor/CodeEditor.types';
+
+const props = defineProps<CodeEditorProps>();
 
 const MONACO_EDITOR_OPTIONS = {
   automaticLayout: true,
   formatOnType: true,
   formatOnPaste: true,
+  minimap: { enabled: false },
 };
 
-const code = ref(defaultFunctionContext);
+const code = ref(props.defaultCode);
 const logicStore = useLogicStore();
 
-const runUserCode = () => {
-  useLevel().initializeLevel(1);
-  logicStore.gameLogic.pawn = eval(`async (pawn) => { ${code.value} }`);  // eslint-disable-line no-eval
-  useUserLogic().runUserCode();
+const saveUserCode = (scope: keyof typeof logicStore.gameLogic) => {
+  logicStore.gameLogic[scope] = eval(`async (entity) => { ${code.value} }`);  // eslint-disable-line no-eval
 };
 
 defineExpose({
-  runUserCode,
+  saveUserCode,
 });
 </script>
 

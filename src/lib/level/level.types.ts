@@ -23,11 +23,15 @@ export interface LevelData {
   map: LevelMap;
   flatMap: Tile[];
   entities: EntityData;
+  intro: string;
+  defaultCode?: Record<string, string>;
 }
 
 export interface LevelConstructorOptions {
   blueprint: LevelMapBlueprint;
   entities: LevelEntityBluePrint;
+  intro: string;
+  defaultCode?: Record<string, string>;
 }
 
 export interface SpriteTileLookupOptions {

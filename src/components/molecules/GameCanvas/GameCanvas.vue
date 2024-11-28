@@ -49,7 +49,7 @@ const handleDrag = (event: MouseEvent | TouchEvent) => {
 };
 
 const handleDragStart = (event: MouseEvent | TouchEvent) => {
-  if (isOutside.value || ('button' in event && event.button !== 0)) return;
+  if ((event.target as HTMLElement).tagName !== 'CANVAS' || ('button' in event && event.button !== 0)) return;
   startOffset.x = camOffset.x;
   startOffset.y = camOffset.y;
 
@@ -101,5 +101,6 @@ onBeforeUnmount(() => {
 .game-canvas {
   position: relative;
   height: 100%;
+  cursor: url('/images/cursor/cursor.png') 16 16, auto;
 }
 </style>

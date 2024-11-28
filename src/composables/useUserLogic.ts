@@ -3,11 +3,12 @@ import { levelData } from '@composables/useLevel';
 
 export default () => {
   const logicStore = useLogicStore();
-  const { pawns } = levelData.currentLevel.entities;
-  const { pawn: applyPawnLogic } = logicStore.gameLogic;
+  const { pawns, knights } = levelData.currentLevel.entities;
+  const { pawn: applyPawnLogic, knight: applyKnightLogic } = logicStore.gameLogic;
 
   const runUserCode = () => {
     pawns?.forEach(pawn => applyPawnLogic(pawn));
+    knights?.forEach(knight => applyKnightLogic(knight));
   };
 
   return { runUserCode };

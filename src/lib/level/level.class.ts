@@ -21,9 +21,13 @@ export class Level {
     };
 
     this.#properties.flatMap = this.#properties.map.flat().filter(tile => tile !== null);
+
+    this.#properties.defaultCode = options.defaultCode;
+    this.#properties.intro = options.intro;
   }
 
   #properties: LevelData = {
+    intro: '',
     map: [[]],
     flatMap: [],
     entities: {
@@ -38,6 +42,8 @@ export class Level {
   get entities() { return this.#properties.entities; }
   get allEntities() { return Object.values(this.entities).flat() as Entity[]; }
   get waterTouchingTiles() { return this.flatMap.filter(tile => this.#isAdjacentToWater(tile)); }
+  get defaultCode() { return this.#properties.defaultCode; }
+  get intro() { return this.#properties.intro; }
 
   /* --- --- --- --- --- RENDERER API --- --- --- --- --- */
 
