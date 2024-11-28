@@ -41,4 +41,3 @@ export class Entity {
   colorBody = () => { colorBodyHandler(this); };
   draw = (canvas: CanvasRenderingContext2D, camInfo: CamInfo) => { drawHandler(this, canvas, camInfo); };
 }
-

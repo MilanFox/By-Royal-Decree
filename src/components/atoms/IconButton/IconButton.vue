@@ -1,6 +1,6 @@
 <template>
-  <button class="icon-button">
-    <img :src="`/icons/${icon}.png`" :alt="alt">
+  <button class="icon-button" @click="onClick" :title="text">
+    <img :src="`/icons/${icon}.png`" :alt="text">
   </button>
 </template>
 
@@ -12,26 +12,11 @@ defineProps<IconButtonProps>();
 
 <style lang="scss">
 .icon-button {
-  width: 64px;
-  aspect-ratio: 1;
-  background-image: url('/images/button/button_blue.png');
-  background-repeat: no-repeat;
-  display: grid;
-  place-items: center;
-  padding-bottom: 12px;
+  height: 40px;
 
   img {
-    height: 50%;
-    width: 50%;
-    transform: translateY(-1px);
-  }
-
-  &:active {
-    background-image: url('/images/button/button_blue_pressed.png');
-
-    img {
-      transform: translateY(3px);
-    }
+    height: 100%;
+    aspect-ratio: 1;
   }
 }
 </style>

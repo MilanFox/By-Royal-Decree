@@ -32,6 +32,12 @@ export const useRendererStore = defineStore('renderer', () => {
 
   const gameCanvasDimensions = reactive({ width: 0, height: 0 });
 
+  const recenterView = () => {
+    zoomLevel.value = 1;
+    camOffset.x = 0;
+    camOffset.y = 0;
+  };
+
   return {
     canvasLayers,
     tileSize,
@@ -43,5 +49,6 @@ export const useRendererStore = defineStore('renderer', () => {
     zoomIn,
     zoomLevel,
     camOffset,
+    recenterView,
   };
 });
