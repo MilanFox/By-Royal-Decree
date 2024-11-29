@@ -123,7 +123,8 @@ const controls: IconButtonProps[] = [
     z-index: -1;
 
     @include to-breakpoint(tablet) {
-      bottom: -30px;
+      bottom: 10px;
+      left: 20px;
     }
 
     @include from-breakpoint(tablet) {
@@ -139,13 +140,14 @@ const controls: IconButtonProps[] = [
 
     @include to-breakpoint(tablet) {
       width: 50px;
+      transform: rotateZ(90deg);
 
       &:hover {
-        transform: translateY(20px);
+        transform: translateY(10px) rotateZ(90deg);
       }
 
       &--active {
-        transform: translateY(40px) !important;
+        transform: translateY(30px) rotateZ(90deg) !important;
       }
     }
 
@@ -160,19 +162,14 @@ const controls: IconButtonProps[] = [
     }
   }
 
-  &__tab-ribbon {
-    @include to-breakpoint(tablet) {
-      transform: rotateZ(90deg);
-    }
-  }
-
   &__tab-thumbnail {
     position: absolute;
     height: 35px;
 
     @include to-breakpoint(tablet) {
+      transform: rotateZ(-90deg);
       left: 35px;
-      top: 0;
+      top: 5px;
     }
 
     @include from-breakpoint(tablet) {
@@ -188,7 +185,10 @@ const controls: IconButtonProps[] = [
     padding: 24px;
     font-family: sans-serif;
     font-size: 16px;
-    font-weight: 700;
+    font-weight: 300;
+    background: $color-panes-body;
+    color: $color-panes-text-secondary;
+    height: 100%;
   }
 
   &__controls {
