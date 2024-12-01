@@ -1,45 +1,27 @@
 <template>
   <div class="game-view">
-    <Pane title="Live Preview" class="game-view__game-canvas">
-      <GameCanvas/>
-    </Pane>
+    <DoublePageLayout title="Live Preview" :tabs="tabs">
+      <template #left>
+        <GameCanvas class="game-view__game-canvas"/>
+      </template>
 
-    <div class="game-view__tabs">
-      <div class="game-view__tablist" role="tablist">
-        <button
-          v-for="({text, src}, i) in tabs"
-          :key="text"
-          role="tab"
-          class="game-view__tab"
-          @click="currentTab = i"
-          :class="{'game-view__tab--active': currentTab === i}"
-          :aria-controls="`game-view__tabpanel-${i}`"
-          :aria-current="currentTab === i"
-        >
-          <img :alt="text" src="/images/ribbon/ribbon_r.png" class="game-view__tab-ribbon">
-          <img alt="" :src="src" class="game-view__tab-thumbnail"/>
-        </button>
-      </div>
+      <template #right-0>
+        {{ intro }}
+      </template>
 
-      <div class="game-view__tabpanel" role="tabpanel">
-        <Pane title="Intro" v-show="currentTab === 0" class="game-view__tabpanel-content" id="game-view__tabpanel-0">
-          <div class="game-view__tabpanel-text">{{ intro }}</div>
-        </Pane>
-        <Pane title="Pawns" v-show="currentTab === 1" class="game-view__tabpanel-content" id="game-view__tabpanel-1">
-          <CodeEditor ref="codeEditorPawns" :default-code="defaultCode?.pawn ?? ''"/>
-        </Pane>
-        <Pane title="Knights" v-show="currentTab === 2" class="game-view__tabpanel-content" id="game-view__tabpanel-2">
-          <CodeEditor ref="codeEditorKnights" :default-code="defaultCode?.knight ?? ''"/>
-        </Pane>
-      </div>
+      <template #right-1>
+        <CodeEditor ref="codeEditorPawns" :default-code="defaultCode?.pawn ?? ''"/>
+      </template>
 
-      <GameControls :buttons="controls" class="game-view__controls"/>
-    </div>
+      <template #right-2>
+        <CodeEditor ref="codeEditorKnights" :default-code="defaultCode?.knight ?? ''"/>
+      </template>
+    </DoublePageLayout>
+    <GameControls :buttons="controls" class="game-view__controls"/>
   </div>
 </template>
 
 <script setup lang="ts">
-import Pane from '@molecules/Pane/Pane.vue';
 import GameCanvas from '@molecules/GameCanvas/GameCanvas.vue';
 import useLevel, { levelData } from '@composables/useLevel';
 import CodeEditor from '@atoms/CodeEditor/CodeEditor.vue';
@@ -48,6 +30,7 @@ import type { IconButtonProps } from '@atoms/IconButton/IconButton.types';
 import { useRendererStore } from '@stores/renderer';
 import GameControls from '@molecules/GameControls/GameControls.vue';
 import useUserLogic from '@composables/useUserLogic';
+import DoublePageLayout from '@layouts/DoublePage/DoublePageLayout.vue';
 
 useLevel().initializeLevel(1);
 
@@ -65,8 +48,6 @@ const runProgram = () => {
   useUserLogic().runUserCode();
 };
 
-const currentTab = ref(0);
-
 const tabs = [
   { text: 'Intro', src: '/images/deco/signpost.png' },
   { text: 'Pawns', src: '/sprites/pawn/_thumb.png' },
@@ -81,138 +62,23 @@ const controls: IconButtonProps[] = [
 </script>
 
 <style lang="scss">
+
 .game-view {
-  display: grid;
-  isolation: isolate;
-  grid-template-rows: repeat(2, 1fr);
-  grid-template-columns: 1fr;
-
-  @include from-breakpoint(tablet) {
-    width: calc(100% - 100px);
-    grid-template-rows: 1fr;
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  &__game-canvas {
-    position: relative;
-
-    &::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      box-shadow: inset -20px 0 20px rgb(0 0 0 / 20%);
-
-      @include to-breakpoint(tablet) {
-        box-shadow: inset 0 -20px 20px rgb(0 0 0 / 20%);
-      }
-    }
-  }
-
-  &__tabs {
-    position: relative;
-    isolation: isolate;
-
-    @include to-breakpoint(tablet) {
-      height: calc(100% - 100px);
-    }
-
-    &::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      box-shadow: inset 20px 0 20px rgb(0 0 0 / 20%);
-
-      @include to-breakpoint(tablet) {
-        box-shadow: inset 0 20px 20px rgb(0 0 0 / 20%);
-      }
-    }
-  }
-
-  &__tablist {
-    position: absolute;
-    display: flex;
-    z-index: -1;
-
-    @include to-breakpoint(tablet) {
-      bottom: 10px;
-      left: 20px;
-    }
-
-    @include from-breakpoint(tablet) {
-      flex-direction: column;
-      right: -50px;
-      top: 25px;
-    }
-  }
-
-  &__tab {
-    transition: transform 100ms ease-in-out;
-    position: relative;
-
-    @include to-breakpoint(tablet) {
-      width: 50px;
-      transform: rotateZ(90deg);
-
-      &:hover {
-        transform: translateY(10px) rotateZ(90deg);
-      }
-
-      &--active {
-        transform: translateY(30px) rotateZ(90deg) !important;
-      }
-    }
-
-    @include from-breakpoint(tablet) {
-      &:hover {
-        transform: translateX(20px);
-      }
-
-      &--active {
-        transform: translateX(40px) !important;
-      }
-    }
-  }
-
-  &__tab-thumbnail {
-    position: absolute;
-    height: 35px;
-
-    @include to-breakpoint(tablet) {
-      transform: rotateZ(-90deg);
-      left: 35px;
-      top: 5px;
-    }
-
-    @include from-breakpoint(tablet) {
-      right: 40px;
-    }
-  }
-
-  &__tabpanel, &__tabpanel-content {
-    height: 100%;
-  }
-
-  &__tabpanel-text {
-    padding: 24px;
-    font-family: sans-serif;
-    font-size: 16px;
-    font-weight: 300;
-    background: $color-panes-body;
-    color: $color-panes-text-secondary;
-    height: 100%;
-  }
+  position: relative;
 
   &__controls {
     position: absolute;
-    right: -50px;
-    bottom: 12px;
+    right: 25px;
+    bottom: 65px;
 
-    @include to-breakpoint(tablet) {
-      right: 12px;
-      bottom: -50px;
+    @include from-breakpoint(tablet) {
+      right: 50px;
+      bottom: 25px;
     }
+  }
+
+  &__game-canvas {
+    border: 3px inset $color-panes-body;
   }
 }
 
