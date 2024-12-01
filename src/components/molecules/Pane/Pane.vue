@@ -37,8 +37,6 @@ defineProps<PaneProps>();
   &__body {
     flex-grow: 1;
     margin: 0 36px 36px;
-    border: 2px solid $color-panes-border;
-    box-shadow: 0 0 0 3px $color-panes-shadow;
     height: calc(100% - 60px); // Specific Sizes needed for Monaco to be responsive.
     width: calc(100cqw - 36px - 36px); // Specific Sizes needed for Monaco to be responsive.
   }
