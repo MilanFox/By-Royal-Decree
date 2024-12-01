@@ -83,7 +83,6 @@ const controls: IconButtonProps[] = [
 <style lang="scss">
 .game-view {
   display: grid;
-  gap: 16px;
   isolation: isolate;
   grid-template-rows: repeat(2, 1fr);
   grid-template-columns: 1fr;
@@ -95,9 +94,18 @@ const controls: IconButtonProps[] = [
   }
 
   &__game-canvas {
-    @include from-breakpoint(tablet) {
-      grid-column: 1 / span 2;
-      grid-row: 1;
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      box-shadow: inset -20px 0 20px rgb(0 0 0 / 20%);
+
+      @include to-breakpoint(tablet) {
+        box-shadow: inset 0 -20px 20px rgb(0 0 0 / 20%);
+      }
     }
   }
 
@@ -105,15 +113,20 @@ const controls: IconButtonProps[] = [
     position: relative;
     isolation: isolate;
 
-    @include from-breakpoint(tablet) {
-      grid-column: 2;
-      grid-row: 1;
-      z-index: 1;
-      filter: drop-shadow(-12px 0 12px rgba($color-bg, 0.5));
-    }
-
     @include to-breakpoint(tablet) {
       height: calc(100% - 100px);
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      box-shadow: inset 20px 0 20px rgb(0 0 0 / 20%);
+
+      @include to-breakpoint(tablet) {
+        box-shadow: inset 0 20px 20px rgb(0 0 0 / 20%);
+      }
     }
   }
 
