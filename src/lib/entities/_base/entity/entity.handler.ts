@@ -40,12 +40,14 @@ export const drawHandler = (entity: Entity, canvas: CanvasRenderingContext2D, {
   const shadeSprite = entity.spriteSheet.shade;
   const highlightSprite = entity.spriteSheet.highlight;
 
+  const { spriteOffset: offset } = entity;
+
   const sx = entity.currentFrame * entity.spriteSize;
   const sy = entity.currentAnimation * entity.spriteSize;
   const sWidth = entity.spriteSize;
   const sHeight = entity.spriteSize;
-  let dx = entity.x * tileSize + (camOffset.x * zoomLevel) - tileSize;
-  const dy = entity.y * tileSize + (camOffset.y * zoomLevel) - tileSize;
+  let dx = entity.x * tileSize + (camOffset.x * zoomLevel) - tileSize + (offset.x * zoomLevel);
+  const dy = entity.y * tileSize + (camOffset.y * zoomLevel) - tileSize + (offset.y * zoomLevel);
   const dWidth = tileSize * 3;
   const dHeight = tileSize * 3;
 
