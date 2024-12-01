@@ -3,6 +3,7 @@ import type { Pawn } from '@lib/entities/pawn/pawn.class';
 import type { TileName } from '@lib/terrain';
 import type { PawnProps } from '@lib/entities/pawn';
 import { Knight, type KnightProps } from '@lib/entities/knight';
+import { Tree, type TreeProps } from '@lib/entities/tree';
 
 export type Direction = 'up' | 'right' | 'down' | 'left';
 
@@ -12,11 +13,13 @@ export type LevelMapBlueprint = Array<Array<TileName>>;
 export interface LevelEntityBluePrint {
   pawns?: Array<PawnProps>;
   knights?: Array<KnightProps>;
+  trees?: Array<TreeProps>;
 }
 
 export interface EntityData {
   pawns?: Pawn[];
   knights?: Knight[];
+  trees?: Tree[];
 }
 
 export interface LevelData {

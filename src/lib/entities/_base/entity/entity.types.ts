@@ -9,6 +9,7 @@ export interface EntityProps {
   color: entityColor | Color;
   spriteSize: number;
   spriteFrames: number;
+  spriteOffset: { x: number, y: number };
   currentFrame: number;
   elapsedTime: number;
   animationSpeed: number;

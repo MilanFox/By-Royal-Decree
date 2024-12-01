@@ -18,6 +18,7 @@ export class Entity {
   _color: Color | entityColor = entityColor.WHITE;
   _spriteSize = 64;
   _spriteFrames = 1;
+  _spriteOffset = { x: 0, y: 0 };
   _currentFrame = 0;
   _elapsedTime = 0;
   _animationSpeed = 10;
@@ -32,6 +33,7 @@ export class Entity {
   get color() { return this._color; }
   get spriteSize() { return this._spriteSize; }
   get spriteFrames() { return this._spriteFrames; }
+  get spriteOffset() { return { ...this._spriteOffset }; }
   get currentFrame() { return this._currentFrame; }
   get elapsedTime() { return this._elapsedTime; }
   get animationSpeed() { return this._animationSpeed; }

@@ -4,10 +4,9 @@ const pawn =
 
 // Example:
 await entity.walk('right');
-await entity.walk('left');
-await entity.walk('right');
-await entity.walk('right');
 await entity.walk('down');
+await entity.walk('right');
+await entity.walk('up');
 
 entity.endRoutine();
 

@@ -3,6 +3,7 @@ import { tileFactory } from '@lib/terrain';
 import { Pawn } from '@lib/entities/pawn';
 import { Knight } from '@lib/entities/knight';
 import { Entity } from '@lib/entities/_base';
+import { Tree } from '@lib/entities/tree';
 
 export class Level {
   constructor(options: LevelConstructorOptions) {
@@ -18,6 +19,7 @@ export class Level {
     this.#properties.entities = {
       pawns: options.entities.pawns?.map(entityData => new Pawn(entityData, this)),
       knights: options.entities.knights?.map(entityData => new Knight(entityData, this)),
+      trees: options.entities.trees?.map(entityData => new Tree(entityData, this)),
     };
 
     this.#properties.flatMap = this.#properties.map.flat().filter(tile => tile !== null);
@@ -35,8 +37,6 @@ export class Level {
     },
   };
 
-  /* --- --- --- --- --- PUBLIC GETTERS --- --- --- --- --- */
-
   get map() { return this.#properties.map; }
   get flatMap() { return this.#properties.flatMap; }
   get entities() { return this.#properties.entities; }
@@ -44,8 +44,6 @@ export class Level {
   get waterTouchingTiles() { return this.flatMap.filter(tile => this.#isAdjacentToWater(tile)); }
   get defaultCode() { return this.#properties.defaultCode; }
   get intro() { return this.#properties.intro; }
-
-  /* --- --- --- --- --- RENDERER API --- --- --- --- --- */
 
   #calculateSpriteTileIndex({ x, y, tileName, blueprint }: SpriteTileLookupOptions) {
     let tilingType = 0;
