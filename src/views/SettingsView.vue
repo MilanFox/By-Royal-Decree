@@ -14,6 +14,3 @@ const tabs = [
 ];
 </script>
 
-<style lang="scss">
-
-</style>
