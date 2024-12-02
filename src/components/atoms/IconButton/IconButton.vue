@@ -1,6 +1,6 @@
 <template>
   <button class="icon-button" @click="onClick" :title="text">
-    <img :src="`/icons/${icon}.png`" :alt="text">
+    <img :src="`/buttons/${icon}.png`" :alt="text">
   </button>
 </template>
 

@@ -2,7 +2,10 @@
   <div class="game-view">
     <DoublePageLayout title="Live Preview" :tabs="tabs">
       <template #left>
-        <GameCanvas class="game-view__game-canvas"/>
+        <div class="game-view__preview">
+          <GameCanvas class="game-view__game-canvas"/>
+          <GameControls :buttons="controls" class="game-view__controls"/>
+        </div>
       </template>
 
       <template #right-0>
@@ -17,7 +20,7 @@
         <CodeEditor ref="codeEditorKnights" :default-code="defaultCode?.knight ?? ''"/>
       </template>
     </DoublePageLayout>
-    <GameControls :buttons="controls" class="game-view__controls"/>
+
   </div>
 </template>
 
@@ -61,28 +64,36 @@ if (entities.knights?.length) tabs.push({ text: 'Knights', src: '/sprites/knight
 
 const controls: IconButtonProps[] = [
   { text: 'Run Code', icon: 'play', onClick: runProgram },
-  { text: 'Recenter View', icon: 'vision', onClick: renderStore.recenterView },
+  { text: 'Reset', icon: 'reset', onClick: () => useLevel().initializeLevel(levelID) },
+  { text: 'Validate', icon: 'validate', onClick: () => { /* TODO */ } },
+  { text: 'Zoom In', icon: 'zoom-in', onClick: renderStore.zoomIn },
+  { text: 'Zoom Out', icon: 'zoom-out', onClick: renderStore.zoomOut },
+  { text: 'Recenter View', icon: 'center-view', onClick: renderStore.recenterView },
 ];
 
 </script>
 
 <style lang="scss">
 .game-view {
-  position: relative;
-
-  &__controls {
-    position: absolute;
-    right: 25px;
-    bottom: 65px;
-
-    @include from-breakpoint(tablet) {
-      right: 50px;
-      bottom: 25px;
-    }
+  &__preview {
+    position: relative;
+    height: 100%;
   }
 
   &__game-canvas {
     border: 3px inset $color-panes-body;
+  }
+
+  &__controls {
+    position: absolute;
+    left: 8px;
+    bottom: 8px;
+
+    @include from-breakpoint(tablet) {
+      left: unset;
+      right: 8px;
+      flex-direction: column;
+    }
   }
 }
 

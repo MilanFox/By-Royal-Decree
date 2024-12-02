@@ -9,6 +9,10 @@
         Unfortunately your population is rather dumb and relies on your wisdom to accomplish their tasks - you might
         need to spell it out for them..
       </p>
+      <p>
+        On the right hand side you will find demo levels highlighting existing features.
+        For now they will have working code snippets - later you will have to write these yourself of course.
+      </p>
     </template>
 
     <template #right-0>

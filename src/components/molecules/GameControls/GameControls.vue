@@ -14,11 +14,6 @@ defineProps<GameControlProps>();
 <style lang="scss">
 .game-controls {
   display: flex;
-  gap: 16px;
-
-  @include from-breakpoint(tablet) {
-    flex-direction: column;
-    padding-top: 12px;
-  }
+  gap: 8px;
 }
 </style>
