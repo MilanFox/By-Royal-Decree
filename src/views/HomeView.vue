@@ -25,7 +25,7 @@
 
 <script setup lang="ts">
 import DoublePageLayout from '@layouts/DoublePage/DoublePageLayout.vue';
-import levels from '@lib/level';
+import levels from '@/levels';
 
 const tabs = [
   { text: 'Level Selection', src: '' },

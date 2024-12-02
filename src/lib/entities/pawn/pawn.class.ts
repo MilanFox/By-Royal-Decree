@@ -1,6 +1,6 @@
 import { basePawnOptions, type PawnProps } from './';
 import { MovableEntity } from '@lib/entities/_base/';
-import { Level } from '@lib/level/';
+import type { Level } from '@lib/level/level.class';
 
 export class Pawn extends MovableEntity {
   constructor(options: PawnProps, level: Level) {

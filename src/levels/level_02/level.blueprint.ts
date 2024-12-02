@@ -1,4 +1,4 @@
-import type { LevelMapBlueprint } from '@lib/level';
+import type { LevelMapBlueprint } from '@/levels';
 
 export const blueprint: LevelMapBlueprint = [
   ['🟩', '🟩', '🟩', '🟩', '🟩', '🟩', '🟩', '🟩'],

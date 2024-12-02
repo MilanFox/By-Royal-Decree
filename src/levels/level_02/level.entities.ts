@@ -1,4 +1,4 @@
-import type { LevelEntityBluePrint } from '@lib/level';
+import type { LevelEntityBluePrint } from '@/levels';
 import { entityColor } from '@lib/entities/_base';
 
 export const entities: LevelEntityBluePrint = {

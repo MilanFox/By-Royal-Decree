@@ -1,13 +1,14 @@
 const pawn =
   `while (true) {
   await entity.walk('right');
-  const { entity: nextEntity } = entity.feel('right');
+  const lookAhead = entity.feel('right');
 
-  if ( nextEntity?.name === 'knight') {
+  if ( lookAhead?.entity?.name === 'knight') {
     entity.endRoutine();
+    break;
   }
 
-  if (nextEntity?.name === 'tree') {
+  if (lookAhead?.entity?.name === 'tree') {
     await entity.walk('down');
     await entity.walk('right');
     await entity.walk('right');
@@ -15,6 +16,6 @@ const pawn =
   }
 }`;
 
-const knight = '// Why would the knights need to move? The peasants should work!';
+const knight = 'await entity.walk("right");';
 
 export const defaultCode = { pawn, knight };
