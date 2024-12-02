@@ -70,13 +70,15 @@ const currentTab = ref(0);
 
   &__left {
     --shadow-offset-x: -20px;
-    --dummy-page-offset: -10px;
+    --dummy-page-pos-offset: -10px;
+    --dummy-page-size-offset: 10px;
     --dummy-page-z-index: -1;
   }
 
   &__right {
     --shadow-offset-x: 20px;
-    --dummy-page-offset: calc(-20px - 100%);
+    --dummy-page-pos-offset: calc(-20px - 100%);
+    --dummy-page-size-offset: 20px;
     --dummy-page-z-index: -2;
   }
 
@@ -87,16 +89,18 @@ const currentTab = ref(0);
       content: '';
       position: absolute;
       left: 0;
-      top: var(--dummy-page-offset);;
+      top: var(--dummy-page-pos-offset);
       bottom: 0;
       width: 100%;
-      height: 100%;
+      height: calc(200% + (2 * var(--dummy-page-size-offset)));
       border-image: url('/images/panes/background.png') 64 fill / 64px / 0 round;
       z-index: var(--dummy-page-z-index);
       filter: brightness(70%);
 
       @include from-breakpoint(tablet) {
-        left: var(--dummy-page-offset);
+        width: calc(200% + (2 * var(--dummy-page-size-offset)));
+        height: 100%;
+        left: var(--dummy-page-pos-offset);
         top: 0;
       }
     }
