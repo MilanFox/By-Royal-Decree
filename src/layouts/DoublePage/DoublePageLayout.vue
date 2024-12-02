@@ -93,6 +93,7 @@ const currentTab = ref(0);
       height: 100%;
       border-image: url('/images/panes/background.png') 64 fill / 64px / 0 round;
       z-index: var(--dummy-page-z-index);
+      filter: brightness(70%);
 
       @include from-breakpoint(tablet) {
         left: var(--dummy-page-offset);
