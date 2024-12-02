@@ -6,14 +6,14 @@
       </template>
 
       <template #right-0>
-        {{ intro }}
+        <p>{{ intro }}</p>
       </template>
 
-      <template #right-1>
+      <template #right-1 v-if="entities.pawns?.length">
         <CodeEditor ref="codeEditorPawns" :default-code="defaultCode?.pawn ?? ''"/>
       </template>
 
-      <template #right-2>
+      <template #right-2 v-if="entities.knights?.length">
         <CodeEditor ref="codeEditorKnights" :default-code="defaultCode?.knight ?? ''"/>
       </template>
     </DoublePageLayout>
@@ -37,7 +37,7 @@ const { params: { id } } = useRoute();
 
 useLevel().initializeLevel(parseInt(id.toString(), 10));
 
-const { intro, defaultCode } = levelData.currentLevel;
+const { intro, defaultCode, entities } = levelData.currentLevel;
 
 const renderStore = useRendererStore();
 
@@ -53,9 +53,10 @@ const runProgram = () => {
 
 const tabs = [
   { text: 'Intro', src: '/images/deco/signpost.png' },
-  { text: 'Pawns', src: '/sprites/pawn/_thumb.png' },
-  { text: 'Knights', src: '/sprites/knight/_thumb.png' },
 ];
+
+if (entities.pawns?.length) tabs.push({ text: 'Pawns', src: '/sprites/pawn/_thumb.png' });
+if (entities.knights?.length) tabs.push({ text: 'Knights', src: '/sprites/knight/_thumb.png' });
 
 const controls: IconButtonProps[] = [
   { text: 'Run Code', icon: 'play', onClick: runProgram },
