@@ -1,6 +1,6 @@
 import { blueprint } from './level.blueprint';
 import { entities } from './level.entities';
-import { intro } from './level.intro';
+import { intro, title } from './level.text';
 import { defaultCode } from './level.code';
 
-export default { blueprint, entities, intro, defaultCode };
+export default { title, intro, blueprint, entities, defaultCode };

@@ -10,7 +10,7 @@
 import DoublePageLayout from '@layouts/DoublePage/DoublePageLayout.vue';
 
 const tabs = [
-  { text: 'Game Settings', src: '/icons/settings.png' },
+  { text: 'Game Settings', src: '' },
 ];
 </script>
 
