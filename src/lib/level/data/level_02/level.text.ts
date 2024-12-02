@@ -1,0 +1,4 @@
+export const title = 'Playground';
+
+export const intro = `Hello, this is currently not a level, but just a playground. Feel free to snoop around anyways.
+Feel Free to change the entities instructions and hit the play button.`;
