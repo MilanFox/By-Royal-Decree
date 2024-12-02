@@ -31,8 +31,11 @@ import { useRendererStore } from '@stores/renderer';
 import GameControls from '@molecules/GameControls/GameControls.vue';
 import useUserLogic from '@composables/useUserLogic';
 import DoublePageLayout from '@layouts/DoublePage/DoublePageLayout.vue';
+import { useRoute } from 'vue-router';
 
-useLevel().initializeLevel(1);
+const { params: { id } } = useRoute();
+
+useLevel().initializeLevel(parseInt(id.toString(), 10));
 
 const { intro, defaultCode } = levelData.currentLevel;
 
@@ -62,7 +65,6 @@ const controls: IconButtonProps[] = [
 </script>
 
 <style lang="scss">
-
 .game-view {
   position: relative;
 

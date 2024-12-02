@@ -12,12 +12,16 @@
           role="tab"
           class="double-page__tab"
           @click="currentTab = i"
-          :class="{'double-page__tab--active': currentTab === i}"
           :aria-controls="`double-page__tabpanel-${i}`"
           :aria-current="currentTab === i"
+          :disabled="!src"
+          :class="{
+            'double-page__tab--active': currentTab === i,
+            'double-page__tab--disabled': !src,
+          }"
         >
           <img :alt="text" src="/images/ribbon/ribbon_r.png" class="double-page__tab-ribbon">
-          <img alt="" :src="src" class="double-page__tab-thumbnail"/>
+          <img v-if="src" alt="" :src="src" class="double-page__tab-thumbnail"/>
         </button>
       </div>
 
@@ -134,6 +138,10 @@ const currentTab = ref(0);
 
     &:hover {
       transform: translateY(25px) rotateZ(90deg);
+    }
+
+    &--disabled {
+      cursor: unset;
     }
 
     &--active {
