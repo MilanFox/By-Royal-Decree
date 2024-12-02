@@ -1,5 +1,5 @@
 <template>
-  <DoublePageLayout title="Welcome" :tabs="tabs" class="home-view">
+  <DoublePageLayout title="Welcome" class="home-view">
     <template #left>
       <p>
         You are the monarch of this lands and your population is there to fulfill your wishes. No need to do manual
@@ -30,10 +30,6 @@
 <script setup lang="ts">
 import DoublePageLayout from '@layouts/DoublePage/DoublePageLayout.vue';
 import levels from '@/levels';
-
-const tabs = [
-  { text: 'Level Selection', src: '' },
-];
 </script>
 
 <style lang="scss">

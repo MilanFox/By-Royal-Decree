@@ -1,9 +1,9 @@
 import { defineStore } from 'pinia';
-import { ref } from 'vue';
+import { useLocalStorage } from '@vueuse/core';
 
 export const useUserConfigStore = defineStore('userConfig', () => {
-  const shouldRenderGrid = ref(true);
-  const shouldAnimateSprites = ref(true);
+  const shouldRenderGrid = useLocalStorage('userSetting.shouldRenderGrid', false);
+  const shouldAnimateSprites = useLocalStorage('userSetting.shouldAnimateSprites', true);
 
   return { shouldRenderGrid, shouldAnimateSprites };
 });

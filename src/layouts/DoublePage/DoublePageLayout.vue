@@ -45,7 +45,9 @@ import Pane from '@molecules/Pane/Pane.vue';
 import { ref } from 'vue';
 import type { DoublePageLayoutProps } from './DoublePageLayout.types';
 
-defineProps<DoublePageLayoutProps>();
+withDefaults(defineProps<DoublePageLayoutProps>(), {
+  tabs: () => [{ text: 'Game Settings', src: '' }],
+});
 
 const currentTab = ref(0);
 </script>

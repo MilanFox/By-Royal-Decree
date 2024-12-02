@@ -5,5 +5,5 @@ export interface Tab {
 
 export interface DoublePageLayoutProps {
   title: string;
-  tabs: Tab[];
+  tabs?: Tab[];
 }
