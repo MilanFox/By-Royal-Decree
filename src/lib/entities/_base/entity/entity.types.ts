@@ -3,6 +3,7 @@ import type { Color } from '@lib/types';
 import { entityColor } from '@lib/entities/_base';
 
 export interface EntityProps {
+  name: string;
   x: number;
   y: number;
   level: Level;

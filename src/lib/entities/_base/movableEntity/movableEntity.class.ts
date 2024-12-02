@@ -1,5 +1,5 @@
 import { type Direction, Level } from '@lib/level/';
-import { Entity } from '@lib/entities/_base/';
+import { Entity, feelHandler } from '@lib/entities/_base/';
 import { endRoutineHandler, walkHandler, type MovableEntityProps } from './';
 
 export class MovableEntity extends Entity {
@@ -19,5 +19,6 @@ export class MovableEntity extends Entity {
 
   endRoutine = () => { endRoutineHandler(this); };
   walk = (dir: Direction) => { return walkHandler(this, dir); };
+  feel = (dir: Direction) => { return feelHandler(this, dir); };
 }
 

@@ -22,7 +22,7 @@ export class Level {
       trees: options.entities.trees?.map(entityData => new Tree(entityData, this)) ?? [],
     };
 
-    this.#properties.flatMap = this.#properties.map.flat().filter(tile => tile !== null);
+    this.#properties.flatMap = this.#properties.map.flat().filter(tile => tile !== undefined);
 
     this.#properties.defaultCode = options.defaultCode;
     this.#properties.intro = options.intro;

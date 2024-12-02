@@ -27,7 +27,11 @@ const code = ref(props.defaultCode);
 const logicStore = useLogicStore();
 
 const saveUserCode = (scope: keyof typeof logicStore.gameLogic) => {
-  logicStore.gameLogic[scope] = eval(`async (entity) => { ${code.value} }`);  // eslint-disable-line no-eval
+  try {
+    logicStore.gameLogic[scope] = eval(`async (entity) => { ${code.value} }`);  // eslint-disable-line no-eval
+  } catch (err) { //eslint-disable-line @typescript-eslint/no-unused-vars
+    logicStore.gameLogic[scope] = () => {};
+  }
 };
 
 defineExpose({

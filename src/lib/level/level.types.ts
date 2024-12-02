@@ -7,7 +7,7 @@ import { Tree, type TreeProps } from '@lib/entities/tree';
 
 export type Direction = 'up' | 'right' | 'down' | 'left';
 
-export type LevelMap = Array<Array<Tile | null>>;
+export type LevelMap = Array<Array<Tile | undefined>>;
 export type LevelMapBlueprint = Array<Array<TileName>>;
 
 export interface LevelEntityBluePrint {

@@ -1,22 +1,20 @@
 const pawn =
-  `// Order your entities to do your bidding - your word is law.
-// currently only "walk()" and "endRoutine()" have been implemented
+  `while (true) {
+  await entity.walk('right');
+  const { entity: nextEntity } = entity.feel('right');
 
-// Example:
-await entity.walk('right');
-await entity.walk('down');
-await entity.walk('right');
-await entity.walk('up');
+  if ( nextEntity?.name === 'knight') {
+    entity.endRoutine();
+  }
 
-entity.endRoutine();
+  if (nextEntity?.name === 'tree') {
+    await entity.walk('down');
+    await entity.walk('right');
+    await entity.walk('right');
+    await entity.walk('up');
+  }
+}`;
 
-// Unreachable because routine has ended already:
-await entity.walk('up');`;
-
-const knight =
-  `//You'll figure it out from here...
-
-await entity.walk('right');
-entity.endRoutine();`;
+const knight = '// Why would the knights need to move? The peasants should work!';
 
 export const defaultCode = { pawn, knight };

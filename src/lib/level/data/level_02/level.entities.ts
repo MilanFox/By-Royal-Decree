@@ -3,14 +3,14 @@ import { entityColor } from '@lib/entities/_base';
 
 export const entities: LevelEntityBluePrint = {
   pawns: [
-    { x: 1, y: 1, color: entityColor.BLUE },
-    { x: 2, y: 0, color: entityColor.RED },
-    { x: 0, y: 4, color: entityColor.LAVENDER },
+    { x: 1, y: 1, color: entityColor.RED },
+    { x: 3, y: 3, color: entityColor.BLUE },
   ],
   knights: [
-    { x: 1, y: 4, color: entityColor.YELLOW },
+    { x: 6, y: 1, color: entityColor.RED },
+    { x: 5, y: 3, color: entityColor.BLUE },
   ],
   trees: [
-    { x: 2, y: 1 },
+    { x: 3, y: 1 },
   ],
 };
