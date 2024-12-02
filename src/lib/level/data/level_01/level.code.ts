@@ -1,22 +1,9 @@
 const pawn =
-  `// Order your entities to do your bidding - your word is law.
-// currently only "walk()" and "endRoutine()" have been implemented
-
-// Example:
-await entity.walk('right');
-await entity.walk('down');
-await entity.walk('right');
+  `// Not quite right. Hm.. I can still see them.
 await entity.walk('up');
-
-entity.endRoutine();
-
-// Unreachable because routine has ended already:
-await entity.walk('up');`;
-
-const knight =
-  `//You'll figure it out from here...
-
-await entity.walk('right');
+for (let i = 0; i <= 2; i++) {
+    await entity.walk('right');
+}
 entity.endRoutine();`;
 
-export const defaultCode = { pawn, knight };
+export const defaultCode = { pawn };

@@ -1,5 +1,4 @@
-export const title = 'Humble Beginnings';
+export const title = 'Hide and Seek';
 
-export const intro = `Hello, this is currently not a level, but just a playground. Feel free to snoop around anyways.
-Feel Free to change the entities instructions and hit the play button.
-The canvas is interactive too.`;
+export const intro = '"I want to have an undisturbed view of my lands.'
+                     + 'All pawns should hide behind the trees - I don\'t want to see those peasants. Shoo Shoo!"';

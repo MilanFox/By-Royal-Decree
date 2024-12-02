@@ -17,9 +17,9 @@ export class Level {
     );
 
     this.#properties.entities = {
-      pawns: options.entities.pawns?.map(entityData => new Pawn(entityData, this)),
-      knights: options.entities.knights?.map(entityData => new Knight(entityData, this)),
-      trees: options.entities.trees?.map(entityData => new Tree(entityData, this)),
+      pawns: options.entities.pawns?.map(entityData => new Pawn(entityData, this)) ?? [],
+      knights: options.entities.knights?.map(entityData => new Knight(entityData, this)) ?? [],
+      trees: options.entities.trees?.map(entityData => new Tree(entityData, this)) ?? [],
     };
 
     this.#properties.flatMap = this.#properties.map.flat().filter(tile => tile !== null);
@@ -32,9 +32,7 @@ export class Level {
     intro: '',
     map: [[]],
     flatMap: [],
-    entities: {
-      pawns: [],
-    },
+    entities: {},
   };
 
   get map() { return this.#properties.map; }
