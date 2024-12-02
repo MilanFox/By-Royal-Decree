@@ -1,4 +1,4 @@
-type IconName = 'play' | 'menu' | 'vision';
+type IconName = 'center-view' | 'play' | 'reset' | 'zoom-in' | 'zoom-out' | 'validate' | 'menu';
 
 export interface IconButtonProps {
   icon: IconName;
