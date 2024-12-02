@@ -28,13 +28,14 @@
 import GameCanvas from '@molecules/GameCanvas/GameCanvas.vue';
 import useLevel, { levelData } from '@composables/useLevel';
 import CodeEditor from '@atoms/CodeEditor/CodeEditor.vue';
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import type { IconButtonProps } from '@atoms/IconButton/IconButton.types';
 import { useRendererStore } from '@stores/renderer';
 import GameControls from '@molecules/GameControls/GameControls.vue';
 import useUserLogic from '@composables/useUserLogic';
 import DoublePageLayout from '@layouts/DoublePage/DoublePageLayout.vue';
 import { useRoute } from 'vue-router';
+import levels from '@/levels';
 
 const { params: { id } } = useRoute();
 const levelID = parseInt(id.toString(), 10);
@@ -55,6 +56,8 @@ const runProgram = () => {
   useUserLogic().runUserCode();
 };
 
+const tryCenterView = () => renderStore.recenterView(levels[levelID - 1].blueprint);
+
 const tabs = [
   { text: 'Intro', src: '/images/deco/signpost.png' },
 ];
@@ -68,9 +71,10 @@ const controls: IconButtonProps[] = [
   { text: 'Validate', icon: 'validate', onClick: () => { /* TODO */ } },
   { text: 'Zoom In', icon: 'zoom-in', onClick: renderStore.zoomIn },
   { text: 'Zoom Out', icon: 'zoom-out', onClick: renderStore.zoomOut },
-  { text: 'Recenter View', icon: 'center-view', onClick: renderStore.recenterView },
+  { text: 'Recenter View', icon: 'center-view', onClick: tryCenterView },
 ];
 
+onMounted(tryCenterView);
 </script>
 
 <style lang="scss">
