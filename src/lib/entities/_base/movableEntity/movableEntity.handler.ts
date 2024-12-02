@@ -1,4 +1,4 @@
-import { directions, MovableEntity, movableEntityErrors } from './';
+import { directions, type FeelData, MovableEntity, movableEntityErrors } from './';
 import type { Direction } from '@lib/level';
 
 export const endRoutineHandler = (entity: MovableEntity) => {
@@ -54,4 +54,20 @@ export const walkHandler = async (entity: MovableEntity, dir: Direction) => {
     entity._isDrowning = true;
     entity._currentAnimation = 6;
   }
+};
+
+export const feelHandler = (entity: MovableEntity, dir: Direction): FeelData | undefined => {
+  if (entity.isFinished || entity.isDrowning) return;
+  if (!['up', 'right', 'down', 'left', undefined].includes(dir)) throw movableEntityErrors.UNKNOWN_DIR(dir);
+  if (entity.isBusy) throw movableEntityErrors.IS_BUSY();
+
+  if (dir === undefined) {
+    const landTile = entity._level.map[entity.y][entity.x];
+    return { entity, landTile };
+  }
+
+  const { x, y } = directions[dir];
+  const landTile = entity._level.map[entity.y + y][entity.x + x];
+  const feltEntity = entity._level.allEntities.find(e => e.x === entity.x + x && e.y === entity.y + y);
+  return { entity: feltEntity, landTile };
 };

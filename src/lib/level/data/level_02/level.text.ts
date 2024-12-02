@@ -1,4 +1,4 @@
-export const title = 'Playground';
+export const title = 'Touchy-Feely';
 
-export const intro = `Hello, this is currently not a level, but just a playground. Feel free to snoop around anyways.
-Feel Free to change the entities instructions and hit the play button.`;
+export const intro = `Those lazy pawns need to catch up to their knights!
+I want to see them standing right behind their knight, where they belong!`;

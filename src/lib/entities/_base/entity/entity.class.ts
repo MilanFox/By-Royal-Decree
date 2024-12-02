@@ -29,7 +29,9 @@ export class Entity {
   _level: Level;
   _spriteSheet = { base: new Image(), body: new Image(), shade: new Image(), highlight: new Image() };
   _blockedPosition = { x: 0, y: 0 };
+  _name = 'UNDEFINED';
 
+  get name() { return this._name; }
   get color() { return this._color; }
   get spriteSize() { return this._spriteSize; }
   get spriteFrames() { return this._spriteFrames; }

@@ -1,7 +1,7 @@
 import { Tile } from './tile.class';
 
 export const tileFactory = {
-  '🟦': () => null,
+  '🟦': () => undefined,
   '🟩': (x: number, y: number) => new Tile({
     name: 'grass',
     tiling: '4x4',

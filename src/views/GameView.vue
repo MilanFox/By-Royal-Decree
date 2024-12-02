@@ -34,8 +34,9 @@ import DoublePageLayout from '@layouts/DoublePage/DoublePageLayout.vue';
 import { useRoute } from 'vue-router';
 
 const { params: { id } } = useRoute();
+const levelID = parseInt(id.toString(), 10);
 
-useLevel().initializeLevel(parseInt(id.toString(), 10));
+useLevel().initializeLevel(levelID);
 
 const { intro, defaultCode, entities } = levelData.currentLevel;
 
@@ -47,7 +48,7 @@ const codeEditorKnights = ref();
 const runProgram = () => {
   codeEditorPawns.value?.saveUserCode('pawn');
   codeEditorKnights.value?.saveUserCode('knight');
-  useLevel().initializeLevel(1);
+  useLevel().initializeLevel(levelID);
   useUserLogic().runUserCode();
 };
 

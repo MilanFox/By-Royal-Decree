@@ -28,7 +28,6 @@ export default [
 
       // Suggestions
       'camelcase': ['error', { 'allow': ['level_*'] }],
-      'consistent-return': 'warn',
       'eqeqeq': 'error',
       'func-style': ['error', 'expression'],
       'max-depth': ['error', 3],
