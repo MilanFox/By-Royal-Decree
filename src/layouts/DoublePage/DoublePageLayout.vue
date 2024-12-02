@@ -50,14 +50,14 @@ const currentTab = ref(0);
 .double-page {
   display: grid;
   isolation: isolate;
-  grid-template-rows: repeat(2, 1fr);
+  grid-template-rows: repeat(2, minmax(0, 1fr));
   grid-template-columns: 1fr;
   height: calc(100% - 120px);
   margin-top: 20px;
 
   @include from-breakpoint(tablet) {
-    grid-template-rows: 1fr;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: minmax(0, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     width: calc(100% - 120px);
     margin-top: unset;
     margin-left: 20px;

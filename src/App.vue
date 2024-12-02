@@ -21,17 +21,13 @@ import Footer from '@molecules/Footer/Footer.vue';
   padding: 0 16px;
   max-width: 1600px;
   margin: auto;
-  display: flex;
-  flex-direction: column;
   gap: 16px;
   position: relative;
+  display: grid;
+  grid-template-rows: min-content minmax(0, 1fr) min-content;
 
   &__content {
     height: 100%;
-  }
-
-  main {
-    flex-grow: 1;
   }
 }
 
