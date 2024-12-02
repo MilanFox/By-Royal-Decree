@@ -1,4 +1,4 @@
-import { Level } from '@lib/level/';
+import type { Level } from '@lib/level/level.class';
 import type { Color } from '@lib/types';
 import { entityColor } from '@lib/entities/_base';
 

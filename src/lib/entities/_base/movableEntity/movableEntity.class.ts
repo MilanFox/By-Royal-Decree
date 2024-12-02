@@ -1,6 +1,7 @@
-import { type Direction, Level } from '@lib/level/';
 import { Entity, feelHandler } from '@lib/entities/_base/';
 import { endRoutineHandler, walkHandler, type MovableEntityProps } from './';
+import type { Direction } from '@lib/level/level.types';
+import type { Level } from '@lib/level/level.class';
 
 export class MovableEntity extends Entity {
   constructor(options: Partial<MovableEntityProps>, level: Level) {

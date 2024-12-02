@@ -1,4 +1,4 @@
-import { Level } from '@lib/level/';
+import type { Level } from '@lib/level/level.class';
 import { entityColor } from '@lib/entities/_base';
 import { type EntityProps, updateAnimationHandler, colorBodyHandler, drawHandler } from './';
 import type { CamInfo } from '@composables/useRenderer';

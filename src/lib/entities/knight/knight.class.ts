@@ -1,6 +1,6 @@
 import { baseKnightOptions, type KnightProps } from './';
 import { MovableEntity } from '@lib/entities/_base/';
-import { Level } from '@lib/level/';
+import type { Level } from '@lib/level/level.class';
 
 export class Knight extends MovableEntity {
   constructor(options: KnightProps, level: Level) {

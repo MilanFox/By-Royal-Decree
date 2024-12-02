@@ -1,5 +1,5 @@
 import { directions, type FeelData, MovableEntity, movableEntityErrors } from './';
-import type { Direction } from '@lib/level';
+import type { Direction } from '@/levels';
 
 export const endRoutineHandler = (entity: MovableEntity) => {
   entity._isFinished = true;

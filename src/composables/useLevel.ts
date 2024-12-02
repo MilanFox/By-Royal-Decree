@@ -1,4 +1,4 @@
-import levels from '@lib/level';
+import levels from '@levels/index';
 import { Level } from '@lib/level/level.class';
 
 export const levelData = {
