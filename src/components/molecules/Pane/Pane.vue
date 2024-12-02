@@ -27,11 +27,10 @@ defineProps<PaneProps>();
 
   &__title {
     user-select: none;
-    padding: 8px 30px 0;
-    display: flex;
     align-items: center;
     gap: 8px;
-    margin: 5px 5px 0;
+    margin: 13px 35px 0;
+    border-bottom: 1px solid $color-panes-text;
   }
 
   &__body {
@@ -39,6 +38,7 @@ defineProps<PaneProps>();
     margin: 0 36px 36px;
     height: calc(100% - 60px); // Specific Sizes needed for Monaco to be responsive.
     width: calc(100cqw - 36px - 36px); // Specific Sizes needed for Monaco to be responsive.
+    overflow: auto;
   }
 }
 </style>
