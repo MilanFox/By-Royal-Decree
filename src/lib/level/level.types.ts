@@ -31,9 +31,10 @@ export interface LevelData {
 }
 
 export interface LevelConstructorOptions {
+  title: string;
+  intro: string;
   blueprint: LevelMapBlueprint;
   entities: LevelEntityBluePrint;
-  intro: string;
   defaultCode?: Record<string, string>;
 }
 
