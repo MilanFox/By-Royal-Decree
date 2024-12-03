@@ -1,21 +1,21 @@
 const pawn =
   `while (true) {
-  await entity.walk('right');
-  const lookAhead = entity.feel('right');
+  await pawn.walk('right');
+  const lookAhead = pawn.feel('right');
 
   if ( lookAhead?.entity?.name === 'knight') {
-    entity.endRoutine();
+    pawn.endRoutine();
     break;
   }
 
   if (lookAhead?.entity?.name === 'tree') {
-    await entity.walk('down');
-    await entity.walk('right');
-    await entity.walk('right');
-    await entity.walk('up');
+    await pawn.walk('down');
+    await pawn.walk('right');
+    await pawn.walk('right');
+    await pawn.walk('up');
   }
 }`;
 
-const knight = 'await entity.walk("right");';
+const knight = 'await knight.walk("right");';
 
 export const defaultCode = { pawn, knight };

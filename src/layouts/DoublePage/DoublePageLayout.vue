@@ -46,7 +46,7 @@ import { ref } from 'vue';
 import type { DoublePageLayoutProps } from './DoublePageLayout.types';
 
 withDefaults(defineProps<DoublePageLayoutProps>(), {
-  tabs: () => [{ text: 'Game Settings', src: '' }],
+  tabs: () => [{ text: '', src: '' }],
 });
 
 const currentTab = ref(0);
