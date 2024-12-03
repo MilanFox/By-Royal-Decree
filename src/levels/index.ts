@@ -1,7 +1,10 @@
-import level_01 from './level_01';
-import level_02 from './level_02';
+import type { LevelData } from '@lib/level/level.types';
 
-export default [level_01, level_02];
+const modules = import.meta.glob('./level_*/index.ts', { eager: true });
+type ModuleType = { default: LevelData };
+const levels = Object.values(modules as Record<string, ModuleType>).map((mod) => mod.default);
 
 export * from '@lib/level/level.class';
 export * from '@lib/level/level.types';
+
+export default levels;
