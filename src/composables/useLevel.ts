@@ -3,6 +3,7 @@ import { Level } from '@lib/level/level.class';
 
 export const levelData = {
   currentLevel: new Level({
+    title: '',
     intro: '',
     blueprint: [[]],
     entities: { pawns: [] },
