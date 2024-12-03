@@ -12,6 +12,7 @@ export class MovableEntity extends Entity {
   _isBusy = false;
   _isDrowning = false;
   _isFinished = false;
+  _shouldUseAlternateWalkingAnimation = false;
 
   get speed() { return this._speed; }
   get isBusy() { return this._isBusy; }

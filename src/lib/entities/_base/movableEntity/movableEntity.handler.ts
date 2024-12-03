@@ -11,7 +11,7 @@ export const walkHandler = async (entity: MovableEntity, dir: Direction) => {
   if (entity.isBusy) throw movableEntityErrors.IS_BUSY();
 
   entity._isBusy = true;
-  entity._currentAnimation = 1;
+  entity._currentAnimation = entity._shouldUseAlternateWalkingAnimation ? 5 : 1;
 
   const { x, y } = directions[dir];
   if (x < 0) entity._isWalkingBackwards = true;
@@ -47,7 +47,7 @@ export const walkHandler = async (entity: MovableEntity, dir: Direction) => {
   entity._y = Math.round(entity.y);
 
   entity._isBusy = false;
-  entity._currentAnimation = 0;
+  entity._currentAnimation = entity._shouldUseAlternateWalkingAnimation ? 4 : 0;
 
   const currentTileIsLand = Boolean(entity._level.map[entity.y]?.[entity.x]);
   if (!currentTileIsLand) {
