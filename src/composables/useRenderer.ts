@@ -1,6 +1,7 @@
 import { CanvasLayerIDs, useRendererStore } from '@stores/renderer';
 import { levelData } from '@composables/useLevel';
 import { useUserConfigStore } from '@stores/userConfig';
+import { Resource } from '@lib/entities/resource';
 
 export interface CamInfo {
   zoomLevel: number;
@@ -56,8 +57,11 @@ export default () => {
 
     levelData.currentLevel.allEntities
       .sort((a, b) => {
-        if (a.isResource === b.isResource) return a.y - b.y || a.x - b.x;
-        return a.isResource ? -1 : 1;
+        // Render resources first, if they lay on the ground, so entities step over them
+        if (a.isResource && !(a as Resource).isBeingHeld && !(b.isResource && !(b as Resource).isBeingHeld)) return -1;
+        if (b.isResource && !(b as Resource).isBeingHeld && !(a.isResource && !(a as Resource).isBeingHeld)) return 1;
+        // Fall back to sorting by y and x coordinates
+        return a.y - b.y || a.x - b.x;
       })
       .forEach(entity => {
         if (userConfig.shouldAnimateSprites) entity.updateAnimation(currentTime - lastPaint);
