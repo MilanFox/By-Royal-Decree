@@ -55,7 +55,10 @@ export default () => {
     const currentTime = performance.now();
 
     levelData.currentLevel.allEntities
-      .sort((a, b) => a.y - b.y || a.x - b.x)
+      .sort((a, b) => {
+        if (a.isResource === b.isResource) return a.y - b.y || a.x - b.x;
+        return a.isResource ? -1 : 1;
+      })
       .forEach(entity => {
         if (userConfig.shouldAnimateSprites) entity.updateAnimation(currentTime - lastPaint);
         entity.draw(getCanvasCtx(CanvasLayerIDs.ENTITIES), camInfo);

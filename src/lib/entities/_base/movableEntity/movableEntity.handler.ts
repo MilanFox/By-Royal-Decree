@@ -30,7 +30,7 @@ export const walkHandler = async (entity: MovableEntity, dir: Direction) => {
   while (true) {
     const retryDelay = 1000 / entity.speed;
     const target = { x: entity.x + x, y: entity.y + y };
-    const isTargetBlocked = entity._level.allEntities
+    const isTargetBlocked = entity._level.allEntitiesWithCollision
       .some(e => e.blockedPosition.x === target.x && e.blockedPosition.y === target.y);
 
     if (!isTargetBlocked) {
