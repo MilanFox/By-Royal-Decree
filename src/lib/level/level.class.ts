@@ -4,6 +4,7 @@ import { Pawn } from '@lib/entities/pawn';
 import { Knight } from '@lib/entities/knight';
 import { Entity } from '@lib/entities/_base';
 import { Tree } from '@lib/entities/tree';
+import { Resource } from '@lib/entities/resource';
 
 export class Level {
   constructor(options: LevelConstructorOptions) {
@@ -20,6 +21,7 @@ export class Level {
       pawns: options.entities.pawns?.map(entityData => new Pawn(entityData, this)) ?? [],
       knights: options.entities.knights?.map(entityData => new Knight(entityData, this)) ?? [],
       trees: options.entities.trees?.map(entityData => new Tree(entityData, this)) ?? [],
+      resources: options.entities.resources?.map(entityData => new Resource(entityData, this)) ?? [],
     };
 
     this.#properties.flatMap = this.#properties.map.flat().filter(tile => tile !== undefined);
@@ -29,19 +31,28 @@ export class Level {
   }
 
   #properties: LevelData = {
+    title: '',
     intro: '',
     map: [[]],
     flatMap: [],
     entities: {},
   };
 
+  get title() { return this.#properties.title; }
+  get intro() { return this.#properties.intro; }
+  get defaultCode() { return this.#properties.defaultCode; }
+  
   get map() { return this.#properties.map; }
   get flatMap() { return this.#properties.flatMap; }
+  get waterTouchingTiles() { return this.flatMap.filter(tile => this.#isAdjacentToWater(tile)); }
+
   get entities() { return this.#properties.entities; }
   get allEntities() { return Object.values(this.entities).flat() as Entity[]; }
-  get waterTouchingTiles() { return this.flatMap.filter(tile => this.#isAdjacentToWater(tile)); }
-  get defaultCode() { return this.#properties.defaultCode; }
-  get intro() { return this.#properties.intro; }
+  get allEntitiesWithCollision() { return Object.values(this.entities).flat().filter(e => e.hasCollision) as Entity[]; }
+  get knights() { return [...this.#properties.entities.knights ?? []]; }
+  get pawns() { return [...this.#properties.entities.pawns ?? []]; }
+  get trees() { return [...this.#properties.entities.trees ?? []]; }
+  get resources() { return [...this.#properties.entities.resources ?? []]; }
 
   #calculateSpriteTileIndex({ x, y, tileName, blueprint }: SpriteTileLookupOptions) {
     let tilingType = 0;

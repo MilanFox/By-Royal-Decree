@@ -30,6 +30,8 @@ export class Entity {
   _spriteSheet = { base: new Image(), body: new Image(), shade: new Image(), highlight: new Image() };
   _blockedPosition = { x: 0, y: 0 };
   _name = 'UNDEFINED';
+  _isResource = false;
+  _hasCollision = true;
 
   get name() { return this._name; }
   get color() { return this._color; }
@@ -45,6 +47,8 @@ export class Entity {
   get x() { return this._x; }
   get y() { return this._y; }
   get blockedPosition() { return { ...this._blockedPosition }; }
+  get isResource() { return this._isResource; }
+  get hasCollision() { return this._hasCollision; }
 
   updateAnimation = (deltaTime: number) => { updateAnimationHandler(this, deltaTime); };
   colorBody = () => { colorBodyHandler(this); };
