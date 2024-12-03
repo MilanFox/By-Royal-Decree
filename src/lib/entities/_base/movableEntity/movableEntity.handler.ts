@@ -1,5 +1,7 @@
 import { directions, type FeelData, MovableEntity, movableEntityErrors } from './';
 import type { Direction } from '@/levels';
+import { Pawn } from '@lib/entities/pawn';
+import { Knight } from '@lib/entities/knight';
 
 export const endRoutineHandler = (entity: MovableEntity) => {
   entity._isFinished = true;
@@ -63,11 +65,20 @@ export const feelHandler = (entity: MovableEntity, dir: Direction): FeelData | u
 
   if (dir === undefined) {
     const landTile = entity._level.map[entity.y][entity.x];
-    return { entity, landTile };
+    const resource = entity._level.resources.find(r => r.x === entity.x && r.y === entity.y);
+    return {
+      pawn: entity.name === 'Pawn' ? entity as Pawn : undefined,
+      knight: entity.name === 'Knight' ? entity as Knight : undefined,
+      landTile,
+      resource,
+    };
   }
 
   const { x, y } = directions[dir];
   const landTile = entity._level.map[entity.y + y][entity.x + x];
-  const feltEntity = entity._level.allEntities.find(e => e.x === entity.x + x && e.y === entity.y + y);
-  return { entity: feltEntity, landTile };
+  const knight = entity._level.knights.find(el => el.x === entity.x + x && el.y === entity.y + y);
+  const pawn = entity._level.pawns.find(el => el.x === entity.x + x && el.y === entity.y + y);
+  const tree = entity._level.trees.find(el => el.x === entity.x + x && el.y === entity.y + y);
+  const resource = entity._level.resources.find(el => el.x === entity.x + x && el.y === entity.y + y);
+  return { landTile, pawn, knight, resource, tree };
 };
