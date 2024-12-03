@@ -1,8 +1,8 @@
 const pawn =
-  `await entity.walk('up');
+  `await pawn.walk('up');
 for (let i = 0; i < 2; i++) {
-    await entity.walk('right');
+    await pawn.walk('right');
 }
-entity.endRoutine();`;
+pawn.endRoutine();`;
 
 export const defaultCode = { pawn };
