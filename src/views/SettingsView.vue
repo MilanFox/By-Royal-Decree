@@ -2,8 +2,10 @@
   <DoublePageLayout title="Settings" class="settings-view">
     <template #right-0>
       <ul class="settings-view__setting-list">
-        <li v-for="setting in settings" :key="setting.label">
-          <label><input type="checkbox" v-model="setting.binding" class="settings-view__checkbox"> {{ setting.label }}
+        <li v-for="input in inputs" :key="input.label">
+          <label>
+            <input v-bind="input.options" v-model="input.binding" class="settings-view__input">
+            {{ input.label }}
           </label>
         </li>
       </ul>
@@ -18,11 +20,12 @@ import { storeToRefs } from 'pinia';
 import { reactive } from 'vue';
 
 const userConfig = useUserConfigStore();
-const { shouldAnimateSprites, shouldRenderGrid } = storeToRefs(userConfig);
+const { shouldAnimateSprites, shouldRenderGrid, gameSpeed } = storeToRefs(userConfig);
 
-const settings = reactive([
-  { label: 'Show Grid', binding: shouldRenderGrid },
-  { label: 'Animate Sprites', binding: shouldAnimateSprites },
+const inputs = reactive([
+  { label: 'Show Grid', binding: shouldRenderGrid, options: { type: 'checkbox' } },
+  { label: 'Animate Sprites', binding: shouldAnimateSprites, options: { type: 'checkbox' } },
+  { label: 'Game Speed', binding: gameSpeed, options: { type: 'range', min: 1, max: 10 } },
 ]);
 </script>
 
@@ -33,10 +36,13 @@ const settings = reactive([
     padding: 0;
   }
 
-  &__checkbox {
+  &__input {
     accent-color: $color-panes-text;
-    height: 20px;
-    width: 20px;
+
+    &[type='checkbox'] {
+      height: 20px;
+      width: 20px;
+    }
   }
 }
 </style>

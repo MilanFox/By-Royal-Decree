@@ -2,13 +2,16 @@ import { Entity, feelHandler } from '@lib/entities/_base/';
 import { endRoutineHandler, walkHandler, type MovableEntityProps } from './';
 import type { Direction } from '@lib/level/level.types';
 import type { Level } from '@lib/level/level.class';
+import { useUserConfigStore } from '@stores/userConfig';
+
+const { gameSpeed } = useUserConfigStore();
 
 export class MovableEntity extends Entity {
   constructor(options: Partial<MovableEntityProps>, level: Level) {
     super(options, level);
   }
 
-  _speed = 2;
+  _speed = gameSpeed;
   _isBusy = false;
   _isDrowning = false;
   _isFinished = false;
