@@ -17,7 +17,7 @@ defineProps<NavigationItemProps>();
 
 <style lang="scss">
 .navigation-item {
-  color: inherit;
+  color: $color-white;
   text-decoration: none;
 
   &:hover {
@@ -26,7 +26,7 @@ defineProps<NavigationItemProps>();
 
   &--pill {
     @include from-breakpoint(desktop) {
-      background: $color-contrast;
+      background: $color-white;
       color: $color-bg;
       padding: 4px 12px;
       border-radius: 999px;

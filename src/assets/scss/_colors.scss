@@ -5,27 +5,24 @@
 $colors: (
   bone-white: #FFFCF2,
   eerie-black: #252422,
-  olive-black: #403D39,
-  midnight-blue: #114B5F,
-  flame-orange: #EB5E28,
-  dark-brown: #544644,
-  medium-brown: #766664,
   light-brown: #9D8776,
+  medium-brown: #766664,
+  dark-brown: #544644,
+  olive-black: #383531,
 );
 
 /* Meta Assignment */
 
-$color-text-primary: map.get($colors, bone-white);
-$color-contrast: map.get($colors, bone-white);
+$color-white: map.get($colors, bone-white);
+$color-black: map.get($colors, eerie-black);
 
-/* Color Assignment */
+$color-primary-1: map.get($colors, light-brown);
+$color-primary-2: map.get($colors, medium-brown);
+$color-primary-3: map.get($colors, dark-brown);
+$color-primary-4: map.get($colors, olive-black);
 
-$color-bg: map.get($colors, eerie-black);
+/* Main Attributes */
 
-$color-button-background: map.get($colors, light-brown);
-
-$color-panes-text: map.get($colors, dark-brown);
-$color-panes-text-secondary: map.get($colors, bone-white);
-$color-panes-body: map.get($colors, eerie-black);
-$color-panes-border: map.get($colors, medium-brown);
-$color-panes-shadow: map.get($colors, light-brown);
+$color-text-primary: $color-primary-3;
+$color-borders: $color-primary-4;
+$color-bg: $color-black;
