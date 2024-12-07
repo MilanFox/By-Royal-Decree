@@ -7,6 +7,7 @@ export const levelData = {
     intro: '',
     blueprint: [[]],
     entities: { pawns: [] },
+    validator: (level) => Boolean(level),
   }),
 };
 

@@ -5,6 +5,7 @@ import type { PawnProps } from '@lib/entities/pawn';
 import { Knight, type KnightProps } from '@lib/entities/knight';
 import { Tree, type TreeProps } from '@lib/entities/tree';
 import { Resource, type ResourceProps } from '@lib/entities/resource';
+import type { Level } from '@lib/level/level.class';
 
 export type Direction = 'up' | 'right' | 'down' | 'left';
 
@@ -40,6 +41,7 @@ export interface LevelConstructorOptions {
   blueprint: LevelMapBlueprint;
   entities: LevelEntityBluePrint;
   defaultCode?: Record<string, string>;
+  validator: (level: Level) => boolean;
 }
 
 export interface SpriteTileLookupOptions {

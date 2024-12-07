@@ -28,6 +28,8 @@ export class Level {
 
     this.#properties.defaultCode = options.defaultCode;
     this.#properties.intro = options.intro;
+
+    this.validate = options.validator;
   }
 
   #properties: LevelData = {
@@ -38,10 +40,12 @@ export class Level {
     entities: {},
   };
 
+  validate: (level: Level) => boolean;
+
   get title() { return this.#properties.title; }
   get intro() { return this.#properties.intro; }
   get defaultCode() { return this.#properties.defaultCode; }
-  
+
   get map() { return this.#properties.map; }
   get flatMap() { return this.#properties.flatMap; }
   get waterTouchingTiles() { return this.flatMap.filter(tile => this.#isAdjacentToWater(tile)); }

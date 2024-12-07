@@ -2,6 +2,9 @@ import { CanvasLayerIDs, useRendererStore } from '@stores/renderer';
 import { levelData } from '@composables/useLevel';
 import { useUserConfigStore } from '@stores/userConfig';
 import { Resource } from '@lib/entities/resource';
+import useConfetti from '@composables/useConfetti';
+
+const { drawConfetti } = useConfetti();
 
 export interface CamInfo {
   zoomLevel: number;
@@ -101,6 +104,7 @@ export default () => {
     drawTerrain(camInfo);
     drawGrid(camInfo);
     drawEntities(camInfo);
+    drawConfetti();
 
     requestAnimationFrame(renderLoop);
   };
