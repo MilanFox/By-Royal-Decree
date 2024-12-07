@@ -37,7 +37,7 @@ const inputs = reactive([
   }
 
   &__input {
-    accent-color: $color-panes-text;
+    accent-color: $color-text-primary;
 
     &[type='checkbox'] {
       height: 20px;

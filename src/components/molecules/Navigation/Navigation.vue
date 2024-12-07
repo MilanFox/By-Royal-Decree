@@ -59,7 +59,7 @@ const toggleMobileNavigation = () => shouldShowMobileNavigation.value = !shouldS
         }
 
         li + li {
-          border-top: 1px solid $color-contrast
+          border-top: 1px solid $color-white
         }
       }
 
