@@ -1,6 +1,7 @@
 <template>
   <div class="game-canvas" ref="gameCanvas">
     <CanvasLayer v-for="id in canvasLayers" :id="id" :key="id" aria-hidden="true"/>
+    <CanvasControls class="game-view__controls"/>
   </div>
 </template>
 
@@ -10,6 +11,7 @@ import useRenderer from '@composables/useRenderer';
 import { useMouseInElement } from '@vueuse/core';
 import CanvasLayer from '@atoms/CanvasLayer/CanvasLayer.vue';
 import { onBeforeUnmount, onMounted, reactive, ref } from 'vue';
+import CanvasControls from '@molecules/CanvasControls/CanvasControls.vue';
 
 const { canvasLayers, gameCanvasDimensions, zoomOut, zoomIn, camOffset } = useRendererStore();
 const { renderLoop } = useRenderer();
