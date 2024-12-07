@@ -9,6 +9,7 @@ export enum CanvasLayerIDs {
   TERRAIN = 'canvas-terrain',
   GRID = 'canvas-grid',
   ENTITIES = 'canvas-entities',
+  CONFETTI = 'canvas-confetti'
 }
 
 export const useRendererStore = defineStore('renderer', () => {

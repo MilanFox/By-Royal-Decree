@@ -15,9 +15,6 @@ export const entities: LevelEntityBluePrint = {
     { x: 10, y: 3 },
   ],
   resources: [
-    { x: 4, y: 7, name: 'gold' },
-    { x: 6, y: 7, name: 'meat' },
-    { x: 8, y: 7, name: 'wood' },
     { x: randomTree, y: 2, name: 'gold' },
   ],
 };
