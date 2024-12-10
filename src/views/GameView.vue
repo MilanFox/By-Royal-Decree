@@ -3,15 +3,16 @@
     <DoublePageLayout title="Live Preview" :tabs="tabs">
       <template #left>
         <div class="game-view__preview">
+          <StatusMessage/>
           <GameCanvas class="game-view__game-canvas"/>
         </div>
       </template>
 
       <template #right-0>
         <div class="game-view__game-controls">
-          <TextButton @click="() => useLevel().initializeLevel(levelID)"> Reset Level</TextButton>
-          <TextButton @click="runProgram"> Run Code</TextButton>
-          <TextButton @click="handInLevel"> Validate Solution</TextButton>
+          <TextButton @click="() => useLevel().initializeLevel(levelID)">Reset Level</TextButton>
+          <TextButton @click="runProgram">Run Code</TextButton>
+          <TextButton @click="handInLevel">Validate Solution</TextButton>
         </div>
         <hr aria-hidden="true">
         <p>{{ intro }}</p>
@@ -39,6 +40,9 @@ import DoublePageLayout from '@layouts/DoublePage/DoublePageLayout.vue';
 import { useRoute } from 'vue-router';
 import useConfetti from '@composables/useConfetti';
 import TextButton from '@atoms/TextButton/TextButton.vue';
+import StatusMessage from '@atoms/StatusMessage/StatusMessage.vue';
+import { storeToRefs } from 'pinia';
+import { statusMessage, useStatusMessageStore } from '@stores/statusMessage';
 
 const { params: { id } } = useRoute();
 const levelID = parseInt(id.toString(), 10);
@@ -50,7 +54,10 @@ const { intro, defaultCode, entities, validate } = levelData.currentLevel;
 const codeEditorPawns = ref();
 const codeEditorKnights = ref();
 
+const { clearGameStatus } = useStatusMessageStore();
+
 const runProgram = () => {
+  clearGameStatus();
   codeEditorPawns.value?.saveUserCode('pawn');
   codeEditorKnights.value?.saveUserCode('knight');
   useLevel().initializeLevel(levelID);
@@ -64,16 +71,17 @@ const tabs = [
 if (entities.pawns?.length) tabs.push({ text: 'Pawns', src: '/sprites/pawn/_thumb.png' });
 if (entities.knights?.length) tabs.push({ text: 'Knights', src: '/sprites/knight/_thumb.png' });
 
-const levelIsSolved = ref<boolean>(false);
 const { spawnConfetti } = useConfetti();
+const { levelValidationStatus } = storeToRefs(useStatusMessageStore());
 
 const handInLevel = () => {
   const isValid = validate(levelData.currentLevel);
   if (!isValid) {
-    levelIsSolved.value = false;
+    levelValidationStatus.value = statusMessage.validation.INVALID;
     return;
   }
-  levelIsSolved.value = true;
+
+  levelValidationStatus.value = statusMessage.validation.VALID;
   spawnConfetti();
 };
 </script>
