@@ -28,7 +28,7 @@ export default defineConfig({
   },
   css: {
     preprocessorOptions: {
-      scss: { api: 'modern-compiler', additionalData: '@use "@assets/scss/main.scss" as *;' },
+      scss: { additionalData: '@use "@assets/scss/main.scss" as *;' },
     },
     postcss: {
       plugins: [
