@@ -1,6 +1,5 @@
 <template>
   <div class="default-layout">
-    <SpeedInsights/>
     <Header/>
     <main>
       <RouterView class="default-layout__content"/>
@@ -10,7 +9,6 @@
 </template>
 
 <script setup lang="ts">
-import { SpeedInsights } from '@vercel/speed-insights/vue';
 import Header from '@organisms/Header/Header.vue';
 import Footer from '@molecules/Footer/Footer.vue';
 </script>

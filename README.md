@@ -23,7 +23,7 @@ The current PROD build is deployed as https://by-royal-decree.vercel.app/.
 
 **The whole project is heavily WIP and might change at any point. This is very much experimental.**
 
-This project exists entirely as a learning experience. Therefor It avoids
+This project exists entirely as a learning experience. Therefore it avoids
 pre-built engines to focus on:
 
 - Writing a custom renderer
@@ -31,7 +31,22 @@ pre-built engines to focus on:
 - Managing unpredictable user input and game-state updates.
 
 Vue is included to simplify app-wide state management (Pinia) and routing, which will become more relevant if the
-project grows into a proper website with additional features.
+project grows into a proper website with additional features.[ribbon](public/images/ribbon)
+
+---
+
+## Transparency / Use of LLMs & GenAI
+
+The entire game logic, level building logic, entity classes, renderer, and layout _predates_ LLMs (or at least LLMs in
+their current usable form ). So do the Levels 1-3. So the "MVP" is built entirely without _any_ use of an LLM.
+As an experiment, I have decided to re-visit this project as a good jumping-off-point to experiment with "agentic AI",
+specifically for building new levels, expanding the features, etc.
+
+In case it's important to you,
+[Commit 38f2430](https://github.com/MilanFox/By-Royal-Decree/commit/38f24309ebcac1ba9236ed51a5bce54cc380e9c5) is
+the first commit to introduce _any_ AI-generated content, specifically the image. Reverting to this commit will give you
+a fully playable game, but with a very small pool of levels. All commits after that will, to some degree, be made
+together, or based on LLM generated ideas or content.
 
 ---
 
@@ -66,7 +81,7 @@ development convenience but are intentionally kept minimal for core functionalit
 
 **DevOps / Server Infrastructure:**
 
-- **Vercel**: Deployment Environment, User Metrics
+- **Vercel**: Deployment Environment
 
 ---
 
